@@ -126,6 +126,29 @@ function travel_theme_scripts() {
 
 	wp_enqueue_script( 'travel-theme-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
+
+
+
+// adding new files here
+
+	wp_enqueue_style('travel-foundation', get_template_directory_uri() . '/assets/css/vendor/foundation.min.css', null, '6.5.1');
+	wp_enqueue_script('travel-theme-what-input', get_template_directory_uri() . '/assets/js/vendor/what-input.js', array('jquery'), '6.5.1', true);
+	wp_enqueue_script('travel-theme-what-input', get_template_directory_uri() . '/assets/js/vendor/foundation.min.js', array('jquery', 'travel-theme-what-input'), '6.5.1', true);
+
+	// pushed the foundation files above our custom files otherwise it was overriding our styles
+
+
+	// loading the custom CSS file
+	wp_enqueue_style('travel-theme-style', get_stylesheet_directory_uri().'/assets/css/travel.css', array());
+
+
+
+	// enqueuing the temporary CSS file (EWAN) 
+	wp_enqueue_style('travel-ewan-style', get_stylesheet_directory_uri().'/assets/css/ewan.css', array());
+	wp_enqueue_style('travel-ian-style', get_stylesheet_directory_uri().'/assets/css/ian.css', array());
+	wp_enqueue_style('travel-kat-style', get_stylesheet_directory_uri().'/assets/css/kat.css', array());
+
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
