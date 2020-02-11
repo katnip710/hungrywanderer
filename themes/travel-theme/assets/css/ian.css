@@ -5,7 +5,7 @@
         line-height: 2vw;
         font-size: 1.7vw;
 }
-
+ 
 .is-style-fancy-quote:before {
     content: open-quote;
 }
