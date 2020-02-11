@@ -107,7 +107,7 @@ add_theme_support(
 		array(
 			'name'  => esc_html__( 'Medium Blue', 'travel-theme' ),
 			'slug'  => 'mediumblue',
-			'color' => '#3BF7FA',
+			'color' => '#3B47FA',
 		),
 		array(
 			'name'  => esc_html__( 'Light Blue', 'travel-theme' ),
