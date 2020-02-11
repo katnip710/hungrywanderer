@@ -89,6 +89,11 @@ add_action( 'after_setup_theme', 'travel_theme_setup' );
 add_theme_support( 'wp-block-styles' );
 
 /**
+ * Add support for full width block alignment
+ */
+add_theme_support( 'align-wide' );
+
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
  * Priority 0 to make it available to lower priority callbacks.
