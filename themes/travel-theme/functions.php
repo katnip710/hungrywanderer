@@ -127,6 +127,9 @@ add_theme_support(
 	)
 );
 
+/**
+ * Add support for disabling custom colors
+ */
 add_theme_support( 'disable-custom-colors' );
 
 /**
