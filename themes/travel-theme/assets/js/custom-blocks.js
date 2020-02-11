@@ -13,6 +13,6 @@ registerBlockType('wanderers/custom-border', {
     // custom functions
 
     // built-in functions
-    edit() {},
+    edit() {}, 
     save() {}
 }); 
