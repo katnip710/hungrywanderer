@@ -78,7 +78,7 @@ if ( ! function_exists( 'travel_theme_setup' ) ) :
 			'width'       => 250,
 			'flex-width'  => true,
 			'flex-height' => true,
-		) );
+		) ); 
 	}
 endif;
 add_action( 'after_setup_theme', 'travel_theme_setup' );
