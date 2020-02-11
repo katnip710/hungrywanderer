@@ -18,7 +18,7 @@
  */
 function travel_theme_custom_header_setup() {
 	add_theme_support( 'custom-header', apply_filters( 'travel_theme_custom_header_args', array(
-		'default-image'          => '',
+		'default-image'          => 'logo.svg',
 		'default-text-color'     => '000000',
 		'width'                  => 1000,
 		'height'                 => 250,
