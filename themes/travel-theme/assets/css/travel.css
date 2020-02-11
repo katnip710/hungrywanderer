@@ -1,5 +1,5 @@
 body {
-    background-color: #3B47FA;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -10,6 +10,14 @@ body {
     background-color: #3B47FA;
     width: 100%;
     height: 50vh;
+}
+
+h1 {
+    color: #3B47FA;
+}
+
+h2 {
+    color: #6AAADE;
 }
 
 #primary-menu {
