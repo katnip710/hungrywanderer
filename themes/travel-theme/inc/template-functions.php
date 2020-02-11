@@ -35,3 +35,15 @@ function travel_theme_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'travel_theme_pingback_header' );
+
+/**
+ * Load block editor JS
+ */
+function travel_theme_enqueue_block_editor_assets() {
+	wp_enqueue_script(
+		'block-editor-js',
+		get_template_directory_uri() . '/assets/js/block-editor.js',
+		array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' )
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'travel_theme_enqueue_block_editor_assets' );
