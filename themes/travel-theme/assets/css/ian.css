@@ -1,1 +1,34 @@
-/*  */
+/* style for Fancy Quote block option */
+.is-style-fancy-quote {
+        quotes: "“" "”" "‘" "’";
+        font-style: italic;
+        line-height: 2vw;
+        font-size: 1.7vw;
+}
+
+.is-style-fancy-quote:before {
+    content: open-quote;
+}
+
+.is-style-fancy-quote:after {
+    content: close-quote;
+}
+
+.is-style-fancy-quote:before,
+.is-style-fancy-quote:after {
+    color: #3B47FA;
+    font-size: 2em;
+}
+
+.is-style-fancy-quote {
+    margin-left: 4vw;
+    margin-right: 6vw;
+    text-align: justify;
+    padding-left: 1em;
+    border-left: 5px solid #3B47FA;
+
+}
+
+.is-style-fancy-quote p {
+    display: inline;
+}

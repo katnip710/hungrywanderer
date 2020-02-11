@@ -84,6 +84,89 @@ endif;
 add_action( 'after_setup_theme', 'travel_theme_setup' );
 
 /**
+ * Add support for default core block styles.
+ */
+add_theme_support( 'wp-block-styles' );
+
+/**
+ * Add support for full width block alignment
+ */
+add_theme_support( 'align-wide' );
+
+/**
+ * Add support for custom color palette
+ */
+add_theme_support(
+	'editor-color-palette',
+	array(
+		array(
+			'name'  => esc_html__( 'Aqua', 'travel-theme' ),
+			'slug'  => 'aqua',
+			'color' => '#82F5F1',
+		),
+		array(
+			'name'  => esc_html__( 'Medium Blue', 'travel-theme' ),
+			'slug'  => 'mediumblue',
+			'color' => '#3B47FA',
+		),
+		array(
+			'name'  => esc_html__( 'Light Blue', 'travel-theme' ),
+			'slug'  => 'lightblue',
+			'color' => '#6AAADE',
+		),
+		array(
+			'name'  => esc_html__( 'Aquamarine', 'travel-theme' ),
+			'slug'  => 'aquamarine',
+			'color' => '#6ADE9E',
+		),
+		array(
+			'name'  => esc_html__( 'Light Green', 'travel-theme' ),
+			'slug'  => 'lightgreen',
+			'color' => '#86FF7A',
+		)
+	)
+);
+
+/**
+ * Add support for disabling custom colors
+ */
+add_theme_support( 'disable-custom-colors' );
+
+/**
+ * Add support for font sizes
+ */
+add_theme_support(
+	'editor-font-sizes',
+	array(
+		array(
+			'name' => esc_html__( 'Normal', 'travel-theme' ),
+			'size' => 16,
+			'slug' => 'regular'
+		),
+		array(
+			'name' => esc_html__( 'Small', 'travel-theme' ),
+			'size' => 12,
+			'slug' => 'small'
+		),
+		array(
+			'name' => esc_html__( 'Large', 'travel-theme' ),
+			'size' => 36,
+			'slug' => 'large'
+		),
+		array(
+			'name' => esc_html__( 'Huge', 'travel-theme' ),
+			'size' => 50,
+			'slug' => 'huge'
+		)
+	) 
+);
+
+/**
+ * Add support for responsive embedded content
+ */
+add_theme_support( 'responsive-embeds' );
+
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
  * Priority 0 to make it available to lower priority callbacks.
@@ -139,14 +222,14 @@ function travel_theme_scripts() {
 
 
 	// loading the custom CSS file
-	wp_enqueue_style('travel-theme-style', get_stylesheet_directory_uri().'/assets/css/travel.css', array());
+	wp_enqueue_style('travel-theme-style', get_stylesheet_directory_uri() . '/assets/css/travel.css', array());
 
 
 
 	// enqueuing the temporary CSS file (EWAN) 
-	wp_enqueue_style('travel-ewan-style', get_stylesheet_directory_uri().'/assets/css/ewan.css', array());
-	wp_enqueue_style('travel-ian-style', get_stylesheet_directory_uri().'/assets/css/ian.css', array());
-	wp_enqueue_style('travel-kat-style', get_stylesheet_directory_uri().'/assets/css/kat.css', array());
+	wp_enqueue_style('travel-ewan-style', get_stylesheet_directory_uri() . '/assets/css/ewan.css', array());
+	wp_enqueue_style('travel-ian-style', get_stylesheet_directory_uri() . '/assets/css/ian.css', array());
+	wp_enqueue_style('travel-kat-style', get_stylesheet_directory_uri() . '/assets/css/kat.css', array());
 
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -174,6 +257,11 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Customizer block editor
+ */
+require get_template_directory() . '/inc/block-editor.php';
 
 /**
  * Load Jetpack compatibility file.
