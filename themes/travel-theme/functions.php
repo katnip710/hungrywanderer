@@ -133,6 +133,35 @@ add_theme_support(
 add_theme_support( 'disable-custom-colors' );
 
 /**
+ * Add support for font sizes
+ */
+add_theme_support(
+	'editor-font-sizes',
+	array(
+		array(
+			'name' => esc_html__( 'Normal', 'travel-theme' ),
+			'size' => 16,
+			'slug' => 'regular'
+		),
+		array(
+			'name' => esc_html__( 'Small', 'travel-theme' ),
+			'size' => 12,
+			'slug' => 'small'
+		),
+		array(
+			'name' => esc_html__( 'Large', 'travel-theme' ),
+			'size' => 36,
+			'slug' => 'large'
+		),
+		array(
+			'name' => esc_html__( 'Huge', 'travel-theme' ),
+			'size' => 50,
+			'slug' => 'huge'
+		)
+	) 
+);
+
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
  * Priority 0 to make it available to lower priority callbacks.
