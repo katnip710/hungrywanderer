@@ -167,6 +167,17 @@ add_theme_support(
 add_theme_support( 'responsive-embeds' );
 
 /**
+ * Add custom block - Border
+ */
+
+function wanderers_custom_block_border() {
+	wp_register_script('custom-blocks-js', get_template_directory_uri() . '/assets/js/custom-blocks.js', array( 'wp-blocks' ));
+	register_block_type( 'wanderers/custom-border', array(
+		'editor_script' => 'custom-blocks-js'
+	) );
+}
+add_action( 'init', 'wanderers_custom_block_border');
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
  * Priority 0 to make it available to lower priority callbacks.
