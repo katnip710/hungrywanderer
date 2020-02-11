@@ -220,6 +220,16 @@ function travel_theme_scripts() {
 
 	wp_enqueue_script( 'travel-theme-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
+/**
+ * Enqueque google fonts Montserrat
+ */
+function add_google_fonts() {
+	wp_enqueue_style( ' add_google_fonts ', ' https://fonts.googleapis.com/css?family=Montserrat&display=swap', false );}
+	
+	add_action( 'wp_enqueue_scripts', 'add_google_fonts'); 
+
+
+
 
 
 
