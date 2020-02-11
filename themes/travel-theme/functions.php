@@ -80,7 +80,7 @@ if ( ! function_exists( 'travel_theme_setup' ) ) :
 			'flex-height' => true,
 		) ); 
 	}
-endif;
+endif; 
 add_action( 'after_setup_theme', 'travel_theme_setup' );
 
 /**
