@@ -248,9 +248,9 @@ function add_google_fonts() {
 
 
 	// enqueuing the temporary CSS file (EWAN) 
-	wp_enqueue_style('travel-ewan-style', get_stylesheet_directory_uri() . '/assets/css/ewan.css', array());
+	/* wp_enqueue_style('travel-ewan-style', get_stylesheet_directory_uri() . '/assets/css/ewan.css', array());
 	wp_enqueue_style('travel-ian-style', get_stylesheet_directory_uri() . '/assets/css/ian.css', array());
-	wp_enqueue_style('travel-kat-style', get_stylesheet_directory_uri() . '/assets/css/kat.css', array());
+	wp_enqueue_style('travel-kat-style', get_stylesheet_directory_uri() . '/assets/css/kat.css', array()); */
 
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
