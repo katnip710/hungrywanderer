@@ -107,7 +107,7 @@ add_theme_support(
 		array(
 			'name'  => esc_html__( 'Medium Blue', 'travel-theme' ),
 			'slug'  => 'mediumblue',
-			'color' => '#3BF7FA',
+			'color' => '#3B47FA',
 		),
 		array(
 			'name'  => esc_html__( 'Light Blue', 'travel-theme' ),
@@ -131,6 +131,40 @@ add_theme_support(
  * Add support for disabling custom colors
  */
 add_theme_support( 'disable-custom-colors' );
+
+/**
+ * Add support for font sizes
+ */
+add_theme_support(
+	'editor-font-sizes',
+	array(
+		array(
+			'name' => esc_html__( 'Normal', 'travel-theme' ),
+			'size' => 16,
+			'slug' => 'regular'
+		),
+		array(
+			'name' => esc_html__( 'Small', 'travel-theme' ),
+			'size' => 12,
+			'slug' => 'small'
+		),
+		array(
+			'name' => esc_html__( 'Large', 'travel-theme' ),
+			'size' => 36,
+			'slug' => 'large'
+		),
+		array(
+			'name' => esc_html__( 'Huge', 'travel-theme' ),
+			'size' => 50,
+			'slug' => 'huge'
+		)
+	) 
+);
+
+/**
+ * Add support for responsive embedded content
+ */
+add_theme_support( 'responsive-embeds' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
