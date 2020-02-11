@@ -162,6 +162,11 @@ add_theme_support(
 );
 
 /**
+ * Add support for responsive embedded content
+ */
+add_theme_support( 'responsive-embeds' );
+
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
  * Priority 0 to make it available to lower priority callbacks.
