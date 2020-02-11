@@ -1,5 +1,17 @@
 /*  */
 
-body{
-    background-color: aqua;
+.site-header {
+
+}
+
+#primary-menu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#primary-menu li {
+    margin-right: 5%;
+    font-size: 30px;
+    font-weight: 500;
+    color: #1d1d1d
 }
