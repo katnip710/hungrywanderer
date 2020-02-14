@@ -1,68 +1,182 @@
-/* body {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+/********************************************/
+/****** Hungry Wanderers Custom Styles ******/
+/********************************************/
+
+body {
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
 }
 
 .site-header {
-    background-color: #3B47FA;
-    width: 100%;
-    height: 50vh;
+	background-color: #3B47FA;
+	width: 100%;
+	height: 50vh;
 }
 
+/* Headings */
 h1 {
-    color: #3B47FA;
+	color: #3B47FA;
+	font-family: 'Montserrat', sans-serif;
 }
 
 h2 {
-    color: #6AAADE;
+	color: #6AAADE;
+	font-family: 'Montserrat', sans-serif;
 }
 
+h3 {
+	font-family: 'Montserrat', sans-serif;
+}
+
+h4 {
+	font-family: 'Montserrat', sans-serif;
+}
+
+h5 {
+	font-family: 'Montserrat', sans-serif;
+}
+
+h6 {
+	font-family: 'Montserrat', sans-serif;
+}
+
+/* Pre-formatted blocks */
+
+.wp-block-preformatted {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.wp-block-preformatted strong {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.wp-block-preformatted em {
+	font-size: 1vw;
+}
+
+/* Ordered List */
+
+ol {
+	list-style: none;
+	counter-reset: wanderers-counter;
+	font-family: 'Montserrat', sans-serif;
+}
+
+ol li {
+	counter-increment: wanderers-counter;
+}
+
+ol li::before {
+	content: counter(wanderers-counter) ". ";
+	color: #6ADE9E;
+	font-weight: bold;
+}
+
+ol ul {
+	list-style: none;
+	counter-reset: wanderers-counter;
+}
+/* 
+ol ul:before {
+	content: "o";
+	color: #6ADE9E;
+	list-style: none;
+} */
+
+ol ul li:before {
+	content: "o ";
+	color: #6ADE9E;
+	/* list-style: circle; */
+} 
+
+.is-style-fancy-list {
+	list-style: none;
+	/* counter-reset: wanderers-counter;
+	font-family: 'Montserrat', sans-serif; */
+}
+
+/* Menu */
 #primary-menu {
-    display: flex;
-    justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 #primary-menu li {
-    margin-right: 5%;
-    font-size: 30px;
-    font-weight: 500;
-    color: #1d1d1d
-} */
+	margin-right: 5%;
+	font-size: 30px;
+	font-weight: 500;
+	color: #1d1d1d
+}
 
+
+/* Quotes */
 /* style for Fancy Quote block option */
-/* .is-style-fancy-quote {
-    quotes: "“" "”" "‘" "’";
-    font-style: italic;
-    line-height: 2vw;
-    font-size: 1.7vw;
-}
-
-.is-style-fancy-quote:before {
-content: open-quote;
-}
-
-.is-style-fancy-quote:after {
-content: close-quote;
-}
-
-.is-style-fancy-quote:before,
-.is-style-fancy-quote:after {
-color: #3B47FA;
-font-size: 2em;
-}
 
 .is-style-fancy-quote {
-margin-left: 4vw;
-margin-right: 6vw;
-text-align: justify;
-padding-left: 1em;
-border-left: 5px solid #3B47FA;
-
+	text-align: justify;
+	padding-left: 1em;
+	border-left: 5px double #3B47FA;
+	margin-left: 3vw;
+	margin-right: 6vw;
 }
 
+
 .is-style-fancy-quote p {
-display: inline;
-} */
+	font-size: 2vw;
+	font-style: italic;
+	quotes: "\201C""\201D""\2018""\2019";
+	padding: 10px 20px;
+	line-height: 1.4;
+}
+
+.is-style-fancy-quote p:before {
+	content: open-quote;
+	display: inline;
+	height: 0;
+	line-height: 0;
+	left: -10px;
+	position: relative;
+	top: 30px;
+	color: #ccc;
+	font-size: 3em;
+	color: #3B47FA;
+}
+
+.is-style-fancy-quote p:after {
+	content: close-quote;
+	display: inline;
+	height: 0;
+	line-height: 0;
+	left: 10px;
+	position: relative;
+	top: 35px;
+	color: #ccc;
+	font-size: 3em;
+	color: #3B47FA;
+}
+
+.is-style-fancy-quote cite {
+	margin: 0;
+	text-align: right;
+	font-size: 1.5em;
+	font-style: italic;
+}
+
+/* style for blue quote option */
+.is-style-blue-quote {
+	color: #3B47FA;
+	font-style: italic;
+	font-size: 2vw;
+}
+
+.is-style-blue-quote cite {
+	font-size: 1.5vw;
+}
+
+.wp-block-verse {
+	font-family: 'Montserrat', sans-serif;
+}
