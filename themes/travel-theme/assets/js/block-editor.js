@@ -10,4 +10,14 @@ wp.domReady( function() {
         name: 'underline',
         label: 'underline',
     } );
+
+    wp.blocks.registerBlockStyle( 'core/list', {
+        name: 'fancy-list',
+        label: 'Fancy List',
+    } );
+
+    wp.blocks.registerBlockStyle( 'core/verse', {
+        name: 'fancy-verse',
+        label: 'Fancy verse',
+    } );
 } );

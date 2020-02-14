@@ -1076,6 +1076,7 @@ h6 {
 .wp-block-preformatted {
 	font-family: 'Montserrat', sans-serif;
 }
+
 .wp-block-preformatted strong {
 	font-weight: bold;
 	font-style: italic;
@@ -1083,6 +1084,47 @@ h6 {
 
 .wp-block-preformatted em {
 	font-size: 1vw;
+}
+
+/* Ordered List */
+
+ol {
+	list-style: none;
+	counter-reset: wanderers-counter;
+	font-family: 'Montserrat', sans-serif;
+}
+
+ol li {
+	counter-increment: wanderers-counter;
+}
+
+ol li::before {
+	content: counter(wanderers-counter) ". ";
+	color: #6ADE9E;
+	font-weight: bold;
+}
+
+ol ul {
+	list-style: none;
+	counter-reset: wanderers-counter;
+}
+/* 
+ol ul:before {
+	content: "o";
+	color: #6ADE9E;
+	list-style: none;
+} */
+
+ol ul li:before {
+	content: "o ";
+	color: #6ADE9E;
+	/* list-style: circle; */
+} 
+
+.is-style-fancy-list {
+	list-style: none;
+	/* counter-reset: wanderers-counter;
+	font-family: 'Montserrat', sans-serif; */
 }
 
 /* Menu */
@@ -1111,7 +1153,7 @@ h6 {
 }
 
 
-.is-style-fancy-quote p{
+.is-style-fancy-quote p {
 	font-size: 2vw;
 	font-style: italic;
 	quotes: "\201C""\201D""\2018""\2019";
@@ -1143,7 +1185,7 @@ h6 {
 	color: #ccc;
 	font-size: 3em;
 	color: #3B47FA;
-} 
+}
 
 .is-style-fancy-quote cite {
 	margin: 0;
@@ -1161,4 +1203,8 @@ h6 {
 
 .is-style-blue-quote cite {
 	font-size: 1.5vw;
+}
+
+.wp-block-verse {
+	font-family: 'Montserrat', sans-serif;
 }
