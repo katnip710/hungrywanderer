@@ -80,23 +80,26 @@ ol ul {
 	list-style: none;
 	counter-reset: wanderers-counter;
 }
-/* 
-ol ul:before {
-	content: "o";
-	color: #6ADE9E;
-	list-style: none;
-} */
 
 ol ul li:before {
-	content: "o ";
-	color: #6ADE9E;
-	/* list-style: circle; */
+	content: "\2735" ;
+    color: #6ADE9E;
+    margin-right: 0.3vw;
 } 
 
-.is-style-fancy-list {
+/* Unordered List */
+
+ul {
 	list-style: none;
-	/* counter-reset: wanderers-counter;
-	font-family: 'Montserrat', sans-serif; */
+	counter-reset: wanderers-counter;
+	font-family: 'Montserrat', sans-serif;
+}
+
+ul li:before {
+	content: "\2735" ;
+    color: #6ADE9E;
+    margin-right: 0.3vw;
+    font-weight: bold;
 }
 
 /* Menu */

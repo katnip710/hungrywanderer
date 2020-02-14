@@ -12,8 +12,8 @@ wp.domReady( function() {
     } );
 
     wp.blocks.registerBlockStyle( 'core/list', {
-        name: 'fancy-list',
-        label: 'Fancy List',
+        name: 'fancy-ordered-list',
+        label: 'Fancy Ordered List',
     } );
 
     wp.blocks.registerBlockStyle( 'core/verse', {
