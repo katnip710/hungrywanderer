@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: white;
     display: flex;
     justify-content: center;
@@ -30,10 +30,10 @@ h2 {
     font-size: 30px;
     font-weight: 500;
     color: #1d1d1d
-}
+} */
 
 /* style for Fancy Quote block option */
-.is-style-fancy-quote {
+/* .is-style-fancy-quote {
     quotes: "“" "”" "‘" "’";
     font-style: italic;
     line-height: 2vw;
@@ -65,4 +65,4 @@ border-left: 5px solid #3B47FA;
 
 .is-style-fancy-quote p {
 display: inline;
-}
+} */
