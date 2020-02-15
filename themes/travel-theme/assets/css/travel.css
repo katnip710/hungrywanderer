@@ -485,3 +485,9 @@ ul.is-style-fancy-list li:before {
 	color: whitesmoke;
 	background-color: #6AAADE
 }
+
+/* gallery block */
+.blocks-gallery-item {
+	box-shadow: 3px 3px 10px #dddddd;
+	font-family: 'Montserrat', sans-serif
+}
