@@ -89,13 +89,13 @@ ol ul li:before {
 
 /* Unordered List */
 
-ul {
+.is-style-fancy-list {
 	list-style: none;
 	counter-reset: wanderers-counter;
 	font-family: 'Montserrat', sans-serif;
 }
 
-ul li:before {
+.is-style-fancy-list li:before {
 	content: "\2735" ;
     color: #6ADE9E;
     margin-right: 0.3vw;
@@ -116,7 +116,6 @@ ul li:before {
 }
 
 
-/* Quotes */
 /* style for Fancy Quote block option */
 
 .is-style-fancy-quote {
@@ -188,6 +187,7 @@ ul li:before {
 }
 
 /* Separator styles */
+/* - airplane - */
 .is-style-airplane {
     background: none!important;
     border: none;
@@ -206,6 +206,7 @@ ul li:before {
 	font-family: serif;
 }
 
+/* - flowers - */
 .is-style-flowers {
     background: none!important;
     border: none;
@@ -222,4 +223,35 @@ ul li:before {
     letter-spacing: 2em;
     padding-left: 2em;
 	font-family: serif;
+}
+
+/* Table style */
+/* - stripes - */
+.wp-block-table.is-style-stripes {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.wp-block-table.is-style-stripes tbody tr:nth-child(odd) {
+    background-color: rgba(106,222,158,0.3);
+}
+
+.wp-block-table.is-style-stripes td, .wp-block-table.is-style-stripes th {
+    border-color: transparent;
+}
+
+/* - borders - */
+.wp-block-table.is-style-borders {
+    border-spacing: 0;
+    border-collapse: inherit;
+    background-color: transparent;
+	border-bottom: 1px solid #f3f4f5;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.wp-block-table.is-style-borders tbody tr:nth-child(odd) {
+    background-color: rgba(106,222,158,0.3);
+}
+
+.wp-block-table.is-style-borders td, .wp-block-table.is-style-borders th {
+    border-color: #6ADE9E;
 }

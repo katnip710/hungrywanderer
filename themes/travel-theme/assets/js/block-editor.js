@@ -39,4 +39,11 @@ wp.domReady( function() {
         name: 'flowers',
         label: 'Flowers',
     } );
+
+    wp.blocks.unregisterBlockStyle( 'core/table', 'regular' );
+
+    wp.blocks.registerBlockStyle( 'core/table', {
+        name: 'borders',
+        label: 'Borders',
+    } );
 } );
