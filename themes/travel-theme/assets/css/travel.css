@@ -149,13 +149,12 @@ ul.is-style-fancy-list li:before {
 /* BLOCK QUOTES */
 /* - Fancy Quote - */
 .is-style-fancy-quote {
-	text-align: justify;
 	padding-left: 1em;
 	border-left: 5px double #3B47FA;
 	margin-left: 3vw;
 	margin-right: 6vw;
+	text-align: center;
 }
-
 
 .is-style-fancy-quote p {
 	font-size: 2vw;
@@ -203,6 +202,7 @@ ul.is-style-fancy-list li:before {
 	color: #3B47FA;
 	font-style: italic;
 	font-size: 2vw;
+	text-align: center;
 }
 
 .is-style-blue-quote cite {
@@ -470,7 +470,182 @@ ul.is-style-fancy-list li:before {
 	font-family: 'Great Vibes', sans-serif;
 }
 
-/* image block */
+/* PULL QUOTES */
+
+/* - default -  */
+.wp-block-pullquote {
+	font-style: italic;
+}
+
+.wp-block-pullquote.is-style-default {
+	border-top: 5px double #3B47FA;
+	border-bottom: 5px double #3B47FA;
+}
+
+.wp-block-pullquote.is-style-solid-color p,
+.wp-block-pullquote.is-style-default p {
+	font-size: 2vw;
+	font-style: italic;
+	quotes: "\201C""\201D""\2018""\2019";
+	padding: 10px 20px;
+	line-height: 1.4;
+	text-align: center;
+}
+
+.wp-block-pullquote.is-style-solid-color p:before,
+.wp-block-pullquote.is-style-default p:before {
+	content: open-quote;
+	display: inline;
+	height: 0;
+	line-height: 0;
+	left: -10px;
+	position: relative;
+	top: 30px;
+	color: #ccc;
+	font-size: 3em;
+	color: #3B47FA;
+}
+
+.wp-block-pullquote.is-style-solid-color p:after,
+.wp-block-pullquote.is-style-default p:after {
+	content: close-quote;
+	display: inline;
+	height: 0;
+	line-height: 0;
+	left: 10px;
+	position: relative;
+	top: 35px;
+	color: #ccc;
+	font-size: 3em;
+	color: #3B47FA;
+}
+
+.wp-block-pullquote.is-style-solid-color cite,
+.wp-block-pullquote.is-style-default cite {
+	margin: 0;
+	font-size: 1vw;
+}
+
+/* - solid color - */
+.wp-block-pullquote.is-style-solid-color blockquote {
+	text-align: center;
+	background-color: #6AAADE;
+}
+
+/* - Wide Aligned - */
+/* - default -  */
+.wp-block-pullquote {
+	font-style: italic;
+}
+
+.wp-block-pullquote.is-style-default {
+	border-top: 5px double #3B47FA;
+	border-bottom: 5px double #3B47FA;
+}
+
+.wp-block-pullquote.is-style-solid-color p,
+.wp-block-pullquote.is-style-default p {
+	font-size: 2vw;
+	font-style: italic;
+	quotes: "\201C""\201D""\2018""\2019";
+	padding: 10px 20px;
+	line-height: 1.4;
+	text-align: center;
+}
+
+.wp-block-pullquote.is-style-solid-color p:before,
+.wp-block-pullquote.is-style-default p:before {
+	content: open-quote;
+	display: inline;
+	height: 0;
+	line-height: 0;
+	left: -10px;
+	position: relative;
+	top: 30px;
+	color: #ccc;
+	font-size: 3em;
+	color: #3B47FA;
+}
+
+.wp-block-pullquote.is-style-solid-color p:after,
+.wp-block-pullquote.is-style-default p:after {
+	content: close-quote;
+	display: inline;
+	height: 0;
+	line-height: 0;
+	left: 10px;
+	position: relative;
+	top: 35px;
+	color: #ccc;
+	font-size: 3em;
+	color: #3B47FA;
+}
+
+.wp-block-pullquote.is-style-solid-color cite,
+.wp-block-pullquote.is-style-default cite {
+	margin: 0;
+	font-size: 1vw;
+}
+
+/* - solid color - */
+.wp-block-pullquote.is-style-solid-color blockquote {
+	text-align: center;
+	background-color: #6AAADE;
+}
+
+/* - align left - */
+.wp-block-pullquote.alignright,
+.wp-block-pullquote.alignleft {
+	border-top: 5px double #3B47FA;
+	border-bottom: 5px double #3B47FA;
+}
+
+.wp-block-pullquote.alignright p,
+.wp-block-pullquote.alignleft p {
+	font-size: 1.4vw;
+	font-style: italic;
+	quotes: "\201C""\201D""\2018""\2019";
+	padding: 10px 20px;
+	line-height: 1.4;
+	text-align: center;
+}
+
+.wp-block-pullquote.alignright p:before,
+.wp-block-pullquote.alignleft p:before {
+	content: open-quote;
+	display: inline;
+	height: 0;
+	line-height: 0;
+	left: -10px;
+	position: relative;
+	top: 20px;
+	color: #ccc;
+	font-size: 3em;
+	color: #3B47FA;
+}
+
+.wp-block-pullquote.alignright p:after,
+.wp-block-pullquote.alignleft p:after {
+	content: close-quote;
+	display: inline;
+	height: 0;
+	line-height: 0;
+	left: 10px;
+	position: relative;
+	top: 25px;
+	color: #ccc;
+	font-size: 3em;
+	color: #3B47FA;
+}
+
+.wp-block-pullquote.alignright cite,
+.wp-block-pullquote.alignleft cite {
+	margin: 0;
+	font-size: 1vw;
+}
+
+
+/* IMAGE BLOCK */
 .wp-block-image img {
 	max-width: 100vw;
 	display: block;
@@ -486,7 +661,7 @@ ul.is-style-fancy-list li:before {
 	background-color: #6AAADE
 }
 
-/* gallery block */
+/* GALLERY BLOCK */
 .blocks-gallery-item {
 	box-shadow: 3px 3px 10px #dddddd;
 	font-family: 'Montserrat', sans-serif
