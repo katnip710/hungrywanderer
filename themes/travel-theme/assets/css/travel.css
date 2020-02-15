@@ -428,7 +428,6 @@ ul.is-style-fancy-list li:before {
 /* - drop down - */
 .wp-block-categories-dropdown select {
 	font-family: 'Montserrat', sans-serif;
-	/* list-style-type: square; */
 	color: #3B47FA;
 	background-color: #6ADE9E;
 }
@@ -456,7 +455,17 @@ ul.is-style-fancy-list li:before {
 /* - drop down - */
 .wp-block-archives-dropdown select {
 	font-family: 'Montserrat', sans-serif;
-	/* list-style-type: square; */
 	color: #3B47FA;
 	background-color: #6ADE9E;
+}
+
+/* COLUMNS */
+.wp-block-column {
+	font-family: 'Montserrat', sans-serif;
+}
+
+/* - drop cap - */
+.has-drop-cap:not(:focus):first-letter {
+	font-size: 4em;
+	font-family: 'Great Vibes', sans-serif;
 }
