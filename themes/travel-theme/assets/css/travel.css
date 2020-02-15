@@ -186,3 +186,40 @@ ul li:before {
     margin-left: 2vw;
     font-size: 2vw;
 }
+
+/* Separator styles */
+.is-style-airplane {
+    background: none!important;
+    border: none;
+    text-align: center;
+    max-width: none!important;
+    line-height: 1;
+	height: auto;
+}
+
+.is-style-airplane:before {
+    content: "\2708 \2708 \2708 \2708 \2708";
+    color: #3B47FA;
+    font-size: 20px;
+    letter-spacing: 2em;
+    padding-left: 2em;
+	font-family: serif;
+}
+
+.is-style-flowers {
+    background: none!important;
+    border: none;
+    text-align: center;
+    max-width: none!important;
+    line-height: 1;
+	height: auto;
+}
+
+.is-style-flowers:before {
+    content: "\273F \273F \273F \273F \273F";
+    color: #6ADE9E;
+    font-size: 20px;
+    letter-spacing: 2em;
+    padding-left: 2em;
+	font-family: serif;
+}
