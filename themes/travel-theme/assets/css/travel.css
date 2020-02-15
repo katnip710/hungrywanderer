@@ -16,7 +16,7 @@ body {
 	height: 50vh;
 }
 
-/* Headings */
+/* HEADINGS */
 h1 {
 	color: #3B47FA;
 	font-family: 'Montserrat', sans-serif;
@@ -43,7 +43,7 @@ h6 {
 	font-family: 'Montserrat', sans-serif;
 }
 
-/* Pre-formatted blocks */
+/* PRE-FORMATTED BLOCKS */
 
 .wp-block-preformatted {
 	font-family: 'Montserrat', sans-serif;
@@ -58,7 +58,7 @@ h6 {
 	font-size: 1vw;
 }
 
-/* Ordered List */
+/* ORDERED LIST */
 
 ol {
 	list-style: none;
@@ -87,22 +87,26 @@ ol ul li:before {
     margin-right: 0.3vw;
 } 
 
-/* Unordered List */
+/* UNORDERED LIST */
 
-.is-style-fancy-list {
+ul.is-style-fancy-list {
 	list-style: none;
 	counter-reset: wanderers-counter;
 	font-family: 'Montserrat', sans-serif;
 }
 
-.is-style-fancy-list li:before {
+ul ul{
+	list-style-type: none;
+}
+
+ul.is-style-fancy-list li:before {
 	content: "\2735" ;
     color: #6ADE9E;
     margin-right: 0.3vw;
-    font-weight: bold;
+	font-weight: bold;
 }
 
-/* Menu */
+/* MENU */
 #primary-menu {
 	display: flex;
 	justify-content: flex-end;
@@ -116,8 +120,8 @@ ol ul li:before {
 }
 
 
-/* style for Fancy Quote block option */
-
+/* BLOCK QUOTES */
+/* - Fancy Quote - */
 .is-style-fancy-quote {
 	text-align: justify;
 	padding-left: 1em;
@@ -168,7 +172,7 @@ ol ul li:before {
 	font-style: italic;
 }
 
-/* style for blue quote option */
+/* - Blue Quote - */
 .is-style-blue-quote {
 	color: #3B47FA;
 	font-style: italic;
@@ -179,14 +183,14 @@ ol ul li:before {
 	font-size: 1.5vw;
 }
 
-/* style for verse */
+/* VERSE */
 .wp-block-verse {
 	font-family: 'Great Vibes', sans-serif;
     margin-left: 2vw;
     font-size: 2vw;
 }
 
-/* Separator styles */
+/* SEPARATORS */
 /* - airplane - */
 .is-style-airplane {
     background: none!important;
@@ -225,7 +229,7 @@ ol ul li:before {
 	font-family: serif;
 }
 
-/* Table style */
+/* TABLE */
 /* - stripes - */
 .wp-block-table.is-style-stripes {
 	font-family: 'Montserrat', sans-serif;
@@ -254,4 +258,23 @@ ol ul li:before {
 
 .wp-block-table.is-style-borders td, .wp-block-table.is-style-borders th {
     border-color: #6ADE9E;
+}
+
+/* LATEST POSTS */
+.wp-block-latest-posts.wp-block-latest-posts__list {
+    list-style: none;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.wp-block-latest-posts.wp-block-latest-posts__list li a {
+	color: #3B47FA;
+}
+
+.wp-block-latest-posts.wp-block-latest-posts__list li a:hover {
+	font-style: italic;
+}
+
+.wp-block-latest-posts.wp-block-latest-posts__list li:before {
+    content: "\270D";
+    margin-right: 0.3vw;
 }
