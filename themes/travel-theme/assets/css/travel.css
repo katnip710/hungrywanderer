@@ -18,29 +18,55 @@ body {
 
 /* HEADINGS */
 h1 {
-	color: #3B47FA;
+	/* color: #3B47FA; */
 	font-family: 'Montserrat', sans-serif;
 }
 
 h2 {
-	color: #6AAADE;
+	/* color: #6AAADE; */
 	font-family: 'Montserrat', sans-serif;
+	font-variant-caps: small-caps;
 }
 
 h3 {
 	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
 }
 
 h4 {
 	font-family: 'Montserrat', sans-serif;
+	text-decoration: underline;
 }
 
 h5 {
 	font-family: 'Montserrat', sans-serif;
+	font-variant-caps: small-caps;
 }
 
 h6 {
 	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+.has-aquamarine-color {
+	color: #6ADE9E;
+}
+
+.has-mediumblue-color {
+	color: #3B47FA;
+}
+
+.has-aqua-color {
+	color: #82F5F1;
+}
+
+.has-lightblue-color {
+	color: #6AAADE;
+}
+
+.has-lightgreen-color {
+	color: #86FF7A;
 }
 
 /* PRE-FORMATTED BLOCKS */
@@ -377,4 +403,60 @@ ul.is-style-fancy-list li:before {
 
 .wp-block-button__link.has-lightgreen-background-color {
 	background-color: #86FF7A;
+}
+
+/* CATEGORIES */
+.wp-block-categories {
+	font-family: 'Montserrat', sans-serif;
+	list-style-type: none;
+	color: #3B47FA;
+}
+
+.wp-block-categories li a:hover {
+	font-style: italic;
+}
+
+.wp-block-categories li:before {
+	content: "\2756";
+	margin-right: 0.3vw;
+}
+
+.wp-block-categories li:hover {
+	color: #6ADE9E;
+}
+
+/* - drop down - */
+.wp-block-categories-dropdown select {
+	font-family: 'Montserrat', sans-serif;
+	/* list-style-type: square; */
+	color: #3B47FA;
+	background-color: #6ADE9E;
+}
+
+/* ARCHIVES */
+.wp-block-archives {
+	font-family: 'Montserrat', sans-serif;
+	list-style-type: none;
+	color: #3B47FA;
+}
+
+.wp-block-archives li a:hover {
+	font-style: italic;
+}
+
+.wp-block-archives li:before {
+	content: "\2720";
+	margin-right: 0.3vw;
+}
+
+.wp-block-archives li:hover {
+	color: #6ADE9E;
+}
+
+/* - drop down - */
+.wp-block-archives-dropdown select {
+	font-family: 'Montserrat', sans-serif;
+	/* list-style-type: square; */
+	color: #3B47FA;
+	background-color: #6ADE9E;
 }
