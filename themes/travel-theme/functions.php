@@ -1,7 +1,7 @@
 <?php
 
 /**
- * wanderer functions and definitions
+ * wanderer functions and definition
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
