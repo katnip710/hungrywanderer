@@ -4,16 +4,82 @@
 
 body {
 	background-color: white;
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
 	align-content: center;
 	align-items: center;
 }
 
+/* HEADER */
 .site-header {
-	background-color: #3B47FA;
-	width: 100%;
-	height: 50vh;
+    background-color: white;
+    width: 100%;
+    height: 25vh;
+}
+
+.site-logo img {
+    width: 15vw;
+    height: auto;
+    position: absolute;
+    top: 5vw;
+	left: 4vw;
+	z-index: 10;
+}
+
+/* FOOTER */
+.site-footer {
+    height: 12vh;
+    background-color: #6ADE9E;
+}
+
+.site-info {
+    padding-top: 5.5vh;
+    padding-left: 4vw;
+    font-size: 2.5vh;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.site-info a {
+	text-decoration: none;
+}
+
+.fab {
+    font-size: 2vw;
+    margin-left: 2vw;
+}
+
+.fa-facebook-square {
+	margin-left: 38vw;
+}
+
+/* MENU */
+#primary-menu {
+	display: flex;
+	justify-content: flex-end;
+	list-style: none;
+	margin-top: 5vw;
+}
+
+#primary-menu li {
+	margin-right: 4vw;
+    font-size: 4vh;
+    font-weight: 500;
+    color: #1d1d1d;
+    margin-left: 5vw;
+}
+
+#primary-menu li a {
+	text-decoration: none;
+	color: black;
+}
+
+#primary-menu li:hover {
+	font-style: italic;
+}
+
+.stx-container,
+.swiper-container {
+	top: -16vh;
 }
 
 /* HEADINGS */
@@ -131,20 +197,6 @@ ul.is-style-fancy-list li:before {
 	margin-right: 0.3vw;
 	font-weight: bold;
 }
-
-/* MENU */
-#primary-menu {
-	display: flex;
-	justify-content: flex-end;
-}
-
-#primary-menu li {
-	margin-right: 5%;
-	font-size: 30px;
-	font-weight: 500;
-	color: #1d1d1d
-}
-
 
 /* BLOCK QUOTES */
 /* - Fancy Quote - */
