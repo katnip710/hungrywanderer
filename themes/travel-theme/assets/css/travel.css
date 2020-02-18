@@ -4,10 +4,11 @@
 
 body {
 	background-color: white;
-	/* display: flex; */
+	display: flex;
 	justify-content: center;
 	align-content: center;
 	align-items: center;
+	margin: 2vh;
 }
 
 /* HEADER */
@@ -33,10 +34,10 @@ body {
 }
 
 .site-info {
-    padding-top: 5.5vh;
-    padding-left: 4vw;
-    font-size: 2.5vh;
-    font-family: 'Montserrat', sans-serif;
+    padding-top: 4vh;
+    font-size: 2vh;
+	font-family: 'Montserrat', sans-serif;
+	margin: 4vh;
 }
 
 .site-info a {
@@ -58,11 +59,12 @@ body {
 	justify-content: flex-end;
 	list-style: none;
 	margin-top: 5vw;
+	border-bottom: solid #1d1d1d 0.3vh;
 }
 
 #primary-menu li {
 	margin-right: 4vw;
-    font-size: 4vh;
+    font-size: 3vh;
     font-weight: 500;
     color: #1d1d1d;
     margin-left: 5vw;
@@ -73,8 +75,9 @@ body {
 	color: black;
 }
 
-#primary-menu li:hover {
+#primary-menu li a:hover {
 	font-style: italic;
+	color: #3B47FA;
 }
 
 .stx-container,
@@ -82,10 +85,12 @@ body {
 	top: -16vh;
 }
 
+
 /* HEADINGS */
 h1 {
 	/* color: #3B47FA; */
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'just_another_hand', sans-serif;
+	padding: 4vh;
 }
 
 h2 {
@@ -113,6 +118,11 @@ h6 {
 	font-family: 'Montserrat', sans-serif;
 	text-transform: uppercase;
 	text-decoration: underline;
+}
+
+figcaption {
+	width: 10vh;
+	margin-left: 13vw;
 }
 
 .has-aquamarine-color {
