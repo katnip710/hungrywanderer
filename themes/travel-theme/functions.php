@@ -249,18 +249,11 @@ function travel_theme_scripts()
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
 	}
+
+	wp_enqueue_style('montserrat', 'https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+	wp_enqueue_style('just-another-hand', 'https://fonts.googleapis.com/css?family=Just+Another+Hand&display=swap');
 }
 add_action('wp_enqueue_scripts', 'travel_theme_scripts');
-
-/**
- * Enqueque google fonts Montserrat and Just Another Hand
- */
-function wanderers_add_google_fonts()
-{
-	wp_enqueue_style('montserrat', 'https://fonts.googleapis.com/css?family=Montserrat&display=swap', false);
-	wp_enqueue_style('just_another_hand', 'https://fonts.googleapis.com/css?family=Just+Another+Hand&display=swap', false);
-}
-add_action('wp_enqueue_script', 'wanderers_add_google_fonts');
 
 /**
  * Implement the Custom Header feature.
