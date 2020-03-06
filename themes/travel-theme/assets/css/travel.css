@@ -19,10 +19,10 @@ body {
 }
 
 .site-logo img {
-    width: 15vw;
+    width: 12vw;
     height: auto;
     position: absolute;
-    top: 5vw;
+    top: 4vw;
 	left: 4vw;
 	z-index: 10;
 }
@@ -87,7 +87,7 @@ body {
 
 .stx-container,
 .swiper-container {
-	top: -16vh;
+	top: -23vh;
 }
 
 
