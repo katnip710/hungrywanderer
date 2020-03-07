@@ -11,6 +11,10 @@ body {
 	margin: 2vh;
 }
 
+.site {
+	width: 90%;
+}
+
 /* HEADER */
 .site-header {
     background-color: white;
@@ -34,7 +38,7 @@ body {
 }
 
 .site-info {
-    padding-top: 4vh;
+    padding-top: 5vh;
     font-size: 2vh;
 	font-family: 'Montserrat', sans-serif;
 	margin: 4vh;
@@ -57,6 +61,15 @@ body {
 
 .fa-facebook-square {
 	margin-left: 38vw;
+}
+
+footer .menu-item {
+	list-style: none;
+	display: inline;
+}
+
+footer .menu-item:nth-last-child(1) {
+	color: transparent;
 }
 
 /* MENU */

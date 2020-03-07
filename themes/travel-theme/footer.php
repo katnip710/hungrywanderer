@@ -15,43 +15,16 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( '#', 'travel-theme' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( '%s', 'travel-theme' ), 'Privacy Policy' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<a href="#">Developers API</a>' );
-				?>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<a href="#">Site Map</a>' );
-				?>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<a href="#">Terms & Conditions</a>' );
-				?>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<i href="#" class="fab fa-facebook-square"></i>' );
-				?>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<i href="#" class="fab fa-instagram"></i>' );
-				?>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<i href="#" class="fab fa-twitter"></i>' );
-				?>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<i href="#" class="fab fa-youtube"></i>' );
-				?>
+		<?php
+			if (has_nav_menu ('footer-menu')) {
+					$args = array(
+						'theme_location' => 'footer-menu',
+						'after' => ' | ',
+						'container' => '',
+					);
+					wp_nav_menu( $args );
+				}
+		?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
