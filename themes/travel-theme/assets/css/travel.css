@@ -2,6 +2,12 @@
 /****** Hungry Wanderers Custom Styles ******/
 /********************************************/
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 body {
 	background-color: white;
 	display: flex;
@@ -34,14 +40,14 @@ body {
 /* FOOTER */
 .site-footer {
     height: 12vh;
-    background-color: #6ADE9E;
+	background-color: #6ADE9E;
 }
 
 .site-info {
-    padding-top: 5vh;
+	padding-top: 4vh;
+	padding-left: 2vw;
     font-size: 2vh;
 	font-family: 'Montserrat', sans-serif;
-	margin: 4vh;
 }
 
 .site-info a {
@@ -56,20 +62,29 @@ body {
 
 .fab {
     font-size: 2vw;
-    margin-left: 2vw;
+	margin-left: 2vw;
 }
 
 .fa-facebook-square {
 	margin-left: 38vw;
 }
 
-footer .menu-item {
+.menu-footer-menu-container {
+	float: left;
+	padding-top: 1vh;
+}
+
+footer .menu-item, .social-media li {
 	list-style: none;
 	display: inline;
 }
 
 footer .menu-item:nth-last-child(1) {
 	color: transparent;
+}
+
+.social-media li {
+	margin-left: -0.5vw;
 }
 
 /* MENU */
@@ -94,8 +109,9 @@ footer .menu-item:nth-last-child(1) {
 }
 
 #primary-menu li a:hover {
-	font-style: italic;
+	/* font-style: italic; */
 	color: #3B47FA;
+	border-bottom: 2px solid #3B47FA;
 }
 
 .stx-container,
