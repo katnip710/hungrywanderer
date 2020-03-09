@@ -2,6 +2,10 @@
 namespace FortAwesome;
 
 use \WP_Error, \Exception;
+<<<<<<< HEAD
+=======
+require_once dirname( __FILE__ ) . '/../includes/class-fontawesome-command.php';
+>>>>>>> woocommerce
 
 /**
  * Handle fatal errors
@@ -10,12 +14,24 @@ use \WP_Error, \Exception;
  */
 function notify_admin_fatal_error( $e ) {
 	if ( method_exists( 'FortAwesome\FontAwesome_Loader', 'emit_admin_error_output' ) ) {
+<<<<<<< HEAD
 		add_action(
 			'admin_notices',
+=======
+		$command = new FontAwesome_Command(
+>>>>>>> woocommerce
 			function() use ( $e ) {
 				FontAwesome_Loader::emit_admin_error_output( $e );
 			}
 		);
+<<<<<<< HEAD
+=======
+
+		add_action(
+			'admin_notices',
+			[ $command, 'run' ]
+		);
+>>>>>>> woocommerce
 	}
 }
 

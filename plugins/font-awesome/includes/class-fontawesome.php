@@ -19,6 +19,10 @@ require_once trailingslashit( FONTAWESOME_DIR_PATH ) . 'includes/class-fontaweso
 require_once trailingslashit( FONTAWESOME_DIR_PATH ) . 'includes/class-fontawesome-v3deprecation-controller.php';
 require_once trailingslashit( FONTAWESOME_DIR_PATH ) . 'includes/class-fontawesome-v3mapper.php';
 require_once trailingslashit( FONTAWESOME_DIR_PATH ) . 'includes/class-fontawesome-exception.php';
+<<<<<<< HEAD
+=======
+require_once trailingslashit( FONTAWESOME_DIR_PATH ) . 'includes/class-fontawesome-command.php';
+>>>>>>> woocommerce
 require_once ABSPATH . 'wp-admin/includes/screen.php';
 
 /**
@@ -125,7 +129,11 @@ class FontAwesome {
 	 *
 	 * @since 4.0.0
 	 */
+<<<<<<< HEAD
 	const PLUGIN_VERSION = '4.0.0-rc15';
+=======
+	const PLUGIN_VERSION = '4.0.0-rc16';
+>>>>>>> woocommerce
 	/**
 	 * The namespace for this plugin's REST API.
 	 *
@@ -282,6 +290,52 @@ class FontAwesome {
 	 * @ignore
 	 */
 	protected $screen_id = null;
+<<<<<<< HEAD
+
+	/**
+	 * This tracks the state of whether, when we process options after the
+	 * plugin upgrades from using the v1 options schema to v2, the former
+	 * removeUnregisteredClients option was set. If so we use some automatic
+	 * conflict detection and resolution, like that old feature worked.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @deprecated
+	 * @internal
+	 * @ignore
+	 */
+	protected $_old_remove_unregistered_clients = false;
+
+	/**
+	 * Returns the singleton instance of the FontAwesome plugin.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @see fa()
+	 * @return FontAwesome
+	 */
+	public static function instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 */
+	private function __construct() {
+		/* noop */
+	}
+
+	/**
+	 * Returns this plugin's admin page's screen_id. Only valid after the admin_menu hook has run.
+	 *
+	 * Internal only, not part of this plugin's public API.
+=======
 
 	/**
 	 * This tracks the state of whether, when we process options after the
@@ -345,6 +399,48 @@ class FontAwesome {
 	public function run() {
 		add_action(
 			'init',
+			[ $this, 'init' ],
+			10,
+			/**
+			 * Explicitly indicate to the init action hook that 0 args should be passed in when invoking the
+			 * callback function, so that the default parameter will be used.
+			 * Otherwise, the callback seems to be called with a single empty string parameter, which confuses it.
+			 */
+			0
+		);
+
+		$this->initialize_rest_api();
+
+		if ( is_admin() ) {
+			$this->initialize_admin();
+		}
+	}
+
+	/**
+	 * Callback for init.
+	 *
+	 * Internal use only.
+>>>>>>> woocommerce
+	 *
+	 * @ignore
+	 * @internal
+	 */
+<<<<<<< HEAD
+	public function admin_screen_id() {
+		return $this->screen_id;
+	}
+
+	/**
+	 * Main entry point for running the plugin. Called automatically when the plugin is loaded.
+	 *
+	 * Internal only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 */
+	public function run() {
+		add_action(
+			'init',
 			function () {
 				try {
 					add_shortcode(
@@ -353,9 +449,18 @@ class FontAwesome {
 							return $this->process_shortcode( $params );
 						}
 					);
+=======
+	public function init() {
+		try {
+			$this->try_upgrade();
+>>>>>>> woocommerce
 
-					add_filter( 'widget_text', 'do_shortcode' );
+			add_shortcode(
+				self::SHORTCODE_TAG,
+				[ $this, 'process_shortcode' ]
+			);
 
+<<<<<<< HEAD
 					$this->validate_options( fa()->options() );
 
 					try {
@@ -412,6 +517,174 @@ class FontAwesome {
 
 		if ( is_admin() ) {
 			$this->initialize_admin();
+=======
+			add_filter( 'widget_text', 'do_shortcode' );
+
+			$this->validate_options( fa()->options() );
+
+			try {
+				$this->gather_preferences();
+			// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+			} catch ( PreferenceRegistrationException $e ) {
+				/**
+				 * Ignore this on normal page loads.
+				 * If something seems amiss, the site owner may try to look
+				 * into it on the plugin settings page where some additional
+				 * diagnostic information may be found.
+				 */
+			}
+
+			$this->maybe_enqueue_admin_js_bundle();
+
+			// Setup JavaScript internationalization if we're on WordPress 5.0+.
+			if ( function_exists( 'wp_set_script_translations' ) ) {
+				wp_set_script_translations( self::ADMIN_RESOURCE_HANDLE, 'font-awesome' );
+			}
+
+			if ( $this->using_kit() ) {
+				$this->enqueue_kit( $this->options()['kitToken'] );
+			} else {
+				$resource_collection = $this
+					->release_provider()
+					->get_resource_collection(
+						$this->options()['version'],
+						array(
+							'use_pro'  => $this->pro(),
+							'use_svg'  => 'svg' === $this->technology(),
+							'use_shim' => $this->v4_compatibility(),
+						)
+					);
+
+				$this->enqueue_cdn( $this->options(), $resource_collection );
+			}
+		} catch ( Exception $e ) {
+			notify_admin_fatal_error( $e );
+		} catch ( Error $e ) {
+			notify_admin_fatal_error( $e );
+>>>>>>> woocommerce
+		}
+	}
+
+	/**
+<<<<<<< HEAD
+	 * Returns boolean indicating whether the plugin is currently configured
+	 * to run the client-side conflict detection scanner.
+	 *
+	 * @since 4.0.0
+	 * @return bool
+	 */
+	public function detecting_conflicts() {
+		$conflict_detection = get_option( self::CONFLICT_DETECTION_OPTIONS_KEY );
+
+		if ( isset( $conflict_detection['detectConflictsUntil'] ) && is_integer( $conflict_detection['detectConflictsUntil'] ) ) {
+			return time() < $conflict_detection['detectConflictsUntil'];
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns boolean indicating whether a kit is configured.
+	 *
+	 * It normally shouldn't make a difference to other theme's or plugins
+	 * as to whether Font Awesome is configured to use the standard CDN or a kit.
+	 * Yet this is a valid way to determine that.
+	 *
+	 * @since 4.0.0
+	 * @throws ConfigCorruptionException
+	 * @return bool
+	 */
+	public function using_kit() {
+		$options = $this->options();
+		$this->validate_options( $options );
+		return $this->using_kit_given_options( $options );
+	}
+
+	/**
+	 * Internal use only.
+	 *
+	 * @internal
+	 * @ignore
+	 * @return bool
+	 */
+	private function using_kit_given_options( $options ) {
+		return isset( $options['kitToken'] )
+			&& isset( $options['apiToken'] )
+			&& $options['apiToken']
+			&& is_string( $options['kitToken'] );
+	}
+
+	/**
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 */
+	protected function stringify_constraints( $constraints ) {
+		$flipped_concat_each = array_map(
+			function ( $constraint ) {
+				return "$constraint[1] $constraint[0]";
+			},
+			$constraints
+		);
+		return implode( ' and ', $flipped_concat_each );
+	}
+
+	/**
+=======
+	 * Detects whether upgrade is necessary and performs upgrade if so.
+	 *
+	 * Internal use only.
+	 *
+	 * @throws UpgradeException
+	 * @throws ApiRequestException
+	 * @throws ApiResponseException
+	 * @throws ReleaseProviderStorageException
+	 * @throws ConfigCorruptionException if options are invalid
+	 * @internal
+	 * @ignore
+	 */
+	public function try_upgrade() {
+		$options = get_option( self::OPTIONS_KEY );
+
+		// Upgrade from v1 schema: 4.0.0-rc13 or earlier.
+		if ( isset( $options['lockedLoadSpec'] ) || isset( $options['adminClientLoadSpec'] ) ) {
+			if ( isset( $options['removeUnregisteredClients'] ) && $options['removeUnregisteredClients'] ) {
+				$this->_old_remove_unregistered_clients = true;
+			}
+
+			$upgraded_options = $this->convert_options_from_v1( $options );
+
+			// Delete the old release metadata transient to ensure we refresh it here.
+			delete_transient( FontAwesome_Release_Provider::RELEASES_TRANSIENT );
+
+			$this->refresh_releases();
+
+			/**
+			 * Delete the main option to make sure it's removed entirely, including
+			 * from the autoload cache.
+			 *
+			 * Function delete_option() returns false when it fails, including when the
+			 * option does not exist. We know the option exists, because we just
+			 * queried it above. So any other failure should halt the upgrade
+			 * process to avoid inconsistent states.
+			 */
+			if ( ! delete_option( self::OPTIONS_KEY ) ) {
+				throw UpgradeException::main_option_delete();
+			}
+
+			/**
+			 * If the version is still not set for some reason, set it to a
+			 * default of the latest available version.
+			 */
+			if ( ! isset( $upgraded_options['version'] ) ) {
+				$upgraded_options['version'] = fa()->latest_version();
+			}
+
+			// Final check: validate it.
+			$this->validate_options( $upgraded_options );
+
+			update_option( self::OPTIONS_KEY, $upgraded_options );
 		}
 	}
 
@@ -480,6 +753,7 @@ class FontAwesome {
 	}
 
 	/**
+>>>>>>> woocommerce
 	 * Internal use only, not part of this plugin's public API.
 	 *
 	 * @internal
@@ -522,6 +796,54 @@ class FontAwesome {
 			)
 		);
 	}
+<<<<<<< HEAD
+
+	/**
+	 * Returns the latest available version of Font Awesome as a string, or null
+	 * if the releases metadata has not yet been successfully retrieved from the
+	 * API server.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return null|string
+	 */
+	public function latest_version() {
+		return $this->release_provider()->latest_version();
+	}
+
+	/**
+	 * Queries the Font Awesome API to load releases metadata. Results are
+	 * cached in a site transient.
+	 *
+	 * This is the metadata that supports API
+	 * methods like {@see FontAwesome::latest_version()}
+	 * and all other metadata required to enqueue Font Awesome when configured
+	 * to use the standard CDN (non-kits).
+	 *
+	 * @since 4.0.0
+	 * @throws ApiRequestException
+	 * @throws ApiResponseException
+	 * @throws ReleaseProviderStorageException
+	 */
+	public function refresh_releases() {
+		$this->release_provider()->load_releases();
+	}
+
+	/**
+	 * Returns the time when releases metadata was last
+	 * refreshed.
+	 *
+	 * @see FontAwesome::refresh_releases
+	 * @since 4.0.0
+	 * @return integer|null the time in unix epoch seconds or null if never
+	 */
+	public function releases_refreshed_at() {
+		return $this->release_provider()->refreshed_at();
+	}
+
+	/**
+	 * Refreshes releases only if it's a been a while.
+=======
 
 	/**
 	 * Returns the latest available version of Font Awesome as a string, or null
@@ -573,6 +895,114 @@ class FontAwesome {
 	 *
 	 * @ignore
 	 * @internal
+	 * @return WP_Error|1 error if there was a problem, otherwise 1.
+	 */
+	protected function maybe_refresh_releases() {
+		$refreshed_at = $this->releases_refreshed_at();
+
+		if ( is_null( $refreshed_at ) || ( time() - $refreshed_at ) > self::RELEASES_REFRESH_INTERVAL ) {
+			return $this->refresh_releases();
+		} else {
+			return 1;
+		}
+	}
+
+	/**
+	 * URL for this plugin's admin settings page.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @ignore
+	 * @internal
+	 */
+	private function settings_page_url() {
+		return admin_url( 'admin.php?page=' . self::OPTIONS_PAGE );
+	}
+
+	/**
+	 * The value of the "ts" GET param given for this page request, or null if none.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * We'll be super-strict validating what values we'll accept, insead of passing
+	 * through whatever is on the query string.
+	 *
+	 * @ignore
+	 * @internal
+	 * @return string|null
+	 */
+	private function active_admin_tab() {
+		// phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+		if ( ! isset( $_REQUEST[ self::ADMIN_TAB_QUERY_VAR ] ) || empty( $_REQUEST[ self::ADMIN_TAB_QUERY_VAR ] ) ) {
+			return null;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$value = $_REQUEST[ self::ADMIN_TAB_QUERY_VAR ];
+
+		// These values are defined in the Redux reducer module of the admin JS React app.
+		switch ( $value ) {
+			case 'ts':
+				return 'ADMIN_TAB_TROUBLESHOOT';
+			case 's':
+				return 'ADMIN_TAB_SETTINGS';
+			default:
+				return null;
+		}
+	}
+
+	/**
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 */
+	private function emit_v3_deprecation_admin_notice( $data ) {
+		?>
+		<div class="notice notice-warning is-dismissible">
+			<p>
+				<?php esc_html_e( 'Hey there, from the Font Awesome plugin!', 'font-awesome' ); ?>
+			</p>
+			<p>
+				<?php
+					printf(
+						/* translators: 1: detected icon name 2: literal icon shortcode */
+						esc_html__(
+							'Looks like you\'re using an %2$s shortcode with an old Font Awesome 3 icon name: %1$s. We\'re phasing those out, so it will stop working on your site soon.',
+							'font-awesome'
+						),
+						'<code>' . esc_html( $data['atts']['name'] ) . '</code>',
+						'<code>[icon]</code>'
+					);
+				?>
+			</p>
+			<p>
+				<?php
+					printf(
+						/* translators: 1: opening anchor tag with url 2: closing anchor tag */
+						esc_html__(
+							'Head over to the %1$sFont Awesome Settings%2$s page to see how you can fix it up, or snooze this warning for a while.',
+							'font-awesome'
+						),
+						'<a href="' . esc_html( $this->settings_page_url() ) . '&tab=ts">',
+						'</a>'
+					);
+				?>
+			</p>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Initalizes everything about the admin environment except the React app
+	 * bundle, which is handled in maybe_enqueue_js_bundle().
+>>>>>>> woocommerce
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @ignore
+	 * @internal
+<<<<<<< HEAD
 	 * @return WP_Error|1 error if there was a problem, otherwise 1.
 	 */
 	protected function maybe_refresh_releases() {
@@ -882,9 +1312,400 @@ class FontAwesome {
 			false === array_search( $options['technology'], [ 'svg', 'webfont' ], true )
 		) {
 			throw new ConfigCorruptionException();
+=======
+	 */
+	public function initialize_admin() {
+		$v3deprecation_warning_data = $this->get_v3deprecation_warning_data();
+
+		if ( $v3deprecation_warning_data && ! ( isset( $v3deprecation_warning_data['snooze'] ) && $v3deprecation_warning_data['snooze'] ) ) {
+
+			$v3_deprecation_command = new FontAwesome_Command(
+				function() use ( $v3deprecation_warning_data ) {
+					$current_screen = get_current_screen();
+					if ( $current_screen && fa()->screen_id !== $current_screen->id ) {
+						fa()->emit_v3_deprecation_admin_notice( $v3deprecation_warning_data );
+					}
+				}
+			);
+
+			add_action(
+				'admin_notices',
+				[ $v3_deprecation_command, 'run' ]
+			);
+		}
+
+		$icon_data = 'data:image/svg+xml;base64,'
+			. base64_encode(
+				'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512"><path fill="'
+				. $this->get_admin_icon_color()
+				. '" d="M397.8 32H50.2C22.7 32 0 54.7 0 82.2v347.6C0 457.3 22.7 480 50.2 480h347.6c27.5 0 50.2-22.7 50.2-50.2V82.2c0-27.5-22.7-50.2-50.2-50.2zm-45.4 284.3c0 4.2-3.6 6-7.8 7.8-16.7 7.2-34.6 13.7-53.8 13.7-26.9 0-39.4-16.7-71.7-16.7-23.3 0-47.8 8.4-67.5 17.3-1.2.6-2.4.6-3.6 1.2V385c0 1.8 0 3.6-.6 4.8v1.2c-2.4 8.4-10.2 14.3-19.1 14.3-11.3 0-20.3-9-20.3-20.3V166.4c-7.8-6-13.1-15.5-13.1-26.3 0-18.5 14.9-33.5 33.5-33.5 18.5 0 33.5 14.9 33.5 33.5 0 10.8-4.8 20.3-13.1 26.3v18.5c1.8-.6 3.6-1.2 5.4-2.4 18.5-7.8 40.6-14.3 61.5-14.3 22.7 0 40.6 6 60.9 13.7 4.2 1.8 8.4 2.4 13.1 2.4 22.7 0 47.8-16.1 53.8-16.1 4.8 0 9 3.6 9 7.8v140.3z"/></svg>'
+			);
+
+		$admin_menu_command = new FontAwesome_Command(
+			function() use ( $icon_data ) {
+				fa()->screen_id = add_menu_page(
+					/* translators: add_menu_page page_title */
+					esc_html__( 'Font Awesome Settings', 'font-awesome' ),
+					/* translators: add_menu_page menu_title */
+					esc_html__( 'Font Awesome', 'font-awesome' ),
+					'manage_options',
+					self::OPTIONS_PAGE,
+					array( fa(), 'create_admin_page' ),
+					$icon_data
+				);
+			}
+		);
+
+		add_action(
+			'admin_menu',
+			[ $admin_menu_command, 'run' ]
+		);
+
+		$plugin_action_links_command = new FontAwesome_Command(
+			function ( $links ) {
+				$mylinks = array(
+					/* translators: label for link to settings page on plugin listing */
+					'<a href="' . fa()->settings_page_url() . '">' . esc_html__( 'Settings', 'font-awesome' ) . '</a>',
+				);
+				return array_merge( $links, $mylinks );
+			}
+		);
+
+		add_filter(
+			'plugin_action_links_' . FONTAWESOME_PLUGIN_FILE,
+			[ $plugin_action_links_command, 'run' ]
+		);
+
+		$multi_version_warning_command = new FontAwesome_Command(
+			function( $plugin_file, $plugin_data, $status ) {
+				if ( version_compare( FontAwesome::PLUGIN_VERSION, $plugin_data['Version'], 'ne' ) ) {
+					$loader_version = FontAwesome_Loader::instance()->loaded_path();
+					?>
+					<tr>
+						<td>&nbsp;</td>
+						<td colspan="2" class="notice notice-info notice-alt">
+							<p>
+								<b><?php esc_html_e( 'Great Scott!', 'font-awesome' ); ?></b>
+								<?php
+									printf(
+										/* translators: 1: path to plugin or theme code file 2: current Font Awesome plugin version number */
+										esc_html__(
+											'The active version of the Font Awesome plugin is being loaded by this plugin or theme: %1$s since it\'s the newest (%2$s). We recommend you update the plugin above to the latest version. In the meantime, we\'ll use that newer version for editing your Font Awesome settings so you\'ll be sure to hit 88mph with those icons.',
+											'font-awesome'
+										),
+										'<code>' . esc_html( $loader_version ) . '</code>',
+										'<b>ver. ' . esc_html( FontAwesome::PLUGIN_VERSION ) . '</b>'
+									);
+								?>
+							</p>
+							<p>
+								<?php
+									esc_html_e( 'You\'ve got more than one version of the Font Awesome plugin installed.', 'font-awesome' );
+								?>
+							</p>
+						</td>
+					</tr>
+					<?php
+				}
+			}
+		);
+
+		add_action(
+			'after_plugin_row_' . FONTAWESOME_PLUGIN_FILE,
+			[ $multi_version_warning_command, 'run' ],
+			10,
+			3
+		);
+	}
+
+	/**
+	 * Returns current options.
+	 *
+	 * Internal use only. Not part of this plugin's public API.
+	 *
+	 * @throws ConfigCorruptionException
+	 * @internal
+	 * @ignore
+	 * @return array
+	 */
+	public function options() {
+		$options = get_option( self::OPTIONS_KEY );
+
+		if ( ! $options ) {
+			throw new ConfigCorruptionException();
+		}
+
+		return $options;
+	}
+
+	/**
+	 * Validates options.
+	 *
+	 * Internal use only. Not part of this plugin's public API.
+	 *
+	 * @ignore
+	 * @internal
+	 * @throws ConfigCorruptionException if options are invalid
+	 */
+	public function validate_options( $options ) {
+		$using_kit = $this->using_kit_given_options( $options );
+		$kit_token = isset( $options['kitToken'] ) ? $options['kitToken'] : null;
+		$api_token = isset( $options['apiToken'] ) ? $options['apiToken'] : null;
+		$version   = isset( $options['version'] ) ? $options['version'] : null;
+
+		if ( $using_kit ) {
+			if ( ! boolval( $api_token ) ) {
+				throw new ConfigCorruptionException();
+			}
+
+			if ( ! is_string( $kit_token ) ) {
+				throw new ConfigCorruptionException();
+			}
+
+			if ( ! is_string( $version ) ) {
+				throw new ConfigCorruptionException();
+			}
+		} else {
+			// A null version is permitted, until the release metadata has been queried.
+			if ( ! is_null( $this->releases_refreshed_at() ) ) {
+				/**
+				 * Intentionally not constraining the ending of the version number to
+				 * open the possibility of a pre-release version, which means it would have
+				 * something like -rc42 on the end.
+				 * For example, 5.12.0-rc42.
+				 */
+				$version_is_concrete = is_string( $version )
+					&& 1 === preg_match( '/^[0-9]+\.[0-9]+\.[0-9]+/', $version );
+
+				if ( ! $version_is_concrete ) {
+					throw new ConfigCorruptionException();
+				}
+			}
+		}
+
+		if ( ! isset( $options['v4Compat'] ) || ! is_bool( $options['v4Compat'] ) ) {
+			throw new ConfigCorruptionException();
+		}
+
+		if ( ! isset( $options['usePro'] ) || ! is_bool( $options['usePro'] ) ) {
+			throw new ConfigCorruptionException();
+		}
+
+		if ( ! isset( $options['pseudoElements'] ) || ! is_bool( $options['pseudoElements'] ) ) {
+			throw new ConfigCorruptionException();
+		}
+
+		if (
+			! isset( $options['technology'] ) ||
+			! is_string( $options['technology'] ) ||
+			false === array_search( $options['technology'], [ 'svg', 'webfont' ], true )
+		) {
+			throw new ConfigCorruptionException();
 		}
 	}
 
+	/**
+	 * An array of md5 hashes that identify detected conflicting versions of
+	 * Font Awesome that the site owner has chosen to block from being enqueued.
+	 *
+	 * It is managed through the plugin's settings page.
+	 *
+	 * @since 4.0.0
+	 * @return array
+	 */
+	public function blocklist() {
+		$conflict_detection = get_option( self::CONFLICT_DETECTION_OPTIONS_KEY );
+
+		$unregistered_clients = (
+			isset( $conflict_detection['unregisteredClients'] )
+			&& is_array( $conflict_detection['unregisteredClients'] )
+		)
+			? $conflict_detection['unregisteredClients']
+			: array();
+
+		$blocklist = array_reduce(
+			array_keys( $unregistered_clients ),
+			function( $carry, $md5 ) use ( $unregistered_clients ) {
+				if (
+					isset( $unregistered_clients[ $md5 ]['blocked'] )
+					&& boolval( $unregistered_clients[ $md5 ]['blocked'] )
+				) {
+					array_push( $carry, $md5 );
+				}
+				return $carry;
+			},
+			array()
+		);
+
+		return $blocklist;
+	}
+
+	/**
+	 * Gets the current value of detectConflictsUntil from the conflict detection
+	 * option key in the database.
+	 *
+	 * Returns 0 if that value is unset in the db.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @ignore
+	 * @internal
+	 * @return integer
+	 */
+	protected function detect_conflicts_until() {
+		$conflict_detection = get_option(
+			self::CONFLICT_DETECTION_OPTIONS_KEY,
+			self::DEFAULT_CONFLICT_DETECTION_OPTIONS
+		);
+
+		return isset( $conflict_detection['detectConflictsUntil'] )
+			? $conflict_detection['detectConflictsUntil'] : 0;
+	}
+
+	/**
+	 * Converts a given options array with a v1 schema to one with a v2 schema.
+	 * There are significant changes from the schema used by 4.0.0-rc9 and before.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 * @param $options
+	 * @return array
+	 */
+	public function convert_options_from_v1( $options ) {
+		$converted_options = self::DEFAULT_USER_OPTIONS;
+
+		if ( isset( $options['usePro'] ) ) {
+			$converted_options['usePro'] = $options['usePro'];
+		}
+
+		if ( isset( $options['version'] ) ) {
+			$converted_options['version'] = $options['version'];
+		}
+
+		if ( isset( $options['lockedLoadSpec'] ) ) {
+			$converted_options['technology'] = isset( $options['lockedLoadSpec']['method'] )
+				? $options['lockedLoadSpec']['method']
+				: 'webfont';
+
+			/**
+			 * If technology is webfont, always coerce pseudo-elements to true.
+			 * Otherwise, carry over whatever value it had before.
+			 */
+			$converted_options['pseudoElements'] =
+				'webfont' === $converted_options['technology']
+					? true
+					: (
+						isset( $options['lockedLoadSpec']['pseudoElements'] )
+							? $options['lockedLoadSpec']['pseudoElements']
+							: false
+					);
+
+			$converted_options['v4Compat'] = $options['lockedLoadSpec']['v4shim'];
+		} elseif ( isset( $options['adminClientLoadSpec'] ) ) {
+			$converted_options['technology'] = $options['adminClientLoadSpec']['method'];
+
+			$converted_options['pseudoElements'] = 'svg' === $options['adminClientLoadSpec']['method']
+				&& $options['adminClientLoadSpec']['pseudoElements'];
+
+			$converted_options['v4Compat'] = $options['adminClientLoadSpec']['v4shim'];
+		}
+
+		return $converted_options;
+	}
+
+	/**
+	 * Callback function for creating the plugin's admin page.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @ignore
+	 * @internal
+	 */
+	public function create_admin_page() {
+		include_once FONTAWESOME_DIR_PATH . 'admin/views/main.php';
+	}
+
+	/**
+	 * Resets the singleton instance referenced by this class.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @ignore
+	 * @internal
+	 * @return FontAwesome
+	 */
+	public static function reset() {
+		self::$instance = null;
+		return fa();
+	}
+
+	/**
+	 * Triggers the font_awesome_preferences action to gather preferences from clients.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 * @throws PreferenceRegistrationException
+	 */
+	public function gather_preferences() {
+		/**
+		 * Fired when the plugin is ready for clients to register their preferences.
+		 *
+		 * @since 4.0.0
+		 */
+		try {
+			do_action( 'font_awesome_preferences' );
+		} catch ( Exception $e ) {
+			throw PreferenceRegistrationException::with_thrown( $e );
+		} catch ( Error $e ) {
+			throw PreferenceRegistrationException::with_thrown( $e );
+		}
+	}
+
+	/**
+	 * Returns current preferences conflicts, keyed by option name.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * Should normally only be called after the `font_awesome_enqueued` action has triggered, indicating that all
+	 * client preferences have been registered and processed.
+	 *
+	 * The returned array includes all conflicts between the options configured for this plugin by the site owner
+	 * and any preferences registered by themes or plugins.
+	 *
+	 * The presence of conflicts will not stop this plugin from loading Font Awesome according to its
+	 * configured options, but they will be presented to the site owner in the plugin's admin settings page to
+	 * aid in troubleshooting.
+	 *
+	 * @ignore
+	 * @internal
+	 * @param $options options to use for comparison. Uses $this->options() by default.
+	 * @see FontAwesome::register() register() documents all client preference keys
+	 * @return array
+	 */
+	public function conflicts_by_option( $options = null ) {
+		$conflicts = array();
+
+		$options_for_comparison = is_null( $options ) ? $this->options() : $options;
+
+		foreach ( $this->conflicts_by_client( $options_for_comparison ) as $client_name => $client_conflicts ) {
+			foreach ( $client_conflicts as $conflicted_option ) {
+				// Initialize the key with an empty array if it doesn't already have something in it.
+				$conflicts[ $conflicted_option ] = isset( $conflicts[ $conflicted_option ] )
+					? $conflicts[ $conflicted_option ]
+					: array();
+
+				// Push the current client onto that array.
+				array_push( $conflicts[ $conflicted_option ], $client_name );
+			}
+>>>>>>> woocommerce
+		}
+	}
+
+<<<<<<< HEAD
 	/**
 	 * An array of md5 hashes that identify detected conflicting versions of
 	 * Font Awesome that the site owner has chosen to block from being enqueued.
@@ -1119,12 +1940,551 @@ class FontAwesome {
 					$options_for_comparison,
 					$client_preferences,
 					$this->latest_version()
+=======
+		return $conflicts;
+	}
+
+	/**
+	 * Returns current preferences conflicts, keyed by client name.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * Should normally only be called after the `font_awesome_enqueued` action has triggered, indicating that all
+	 * client preferences have been registered and processed.
+	 *
+	 * The returned array includes all conflicts between the given options and any preferences registered
+	 * by themes or plugins.
+	 *
+	 * The presence of conflicts will not stop this plugin from loading Font Awesome according to its
+	 * configured options, but they will be presented to the site owner in the plugin's admin settings page to
+	 * aid in troubleshooting.
+	 *
+	 * @ignore
+	 * @internal
+	 * @param $options options to use for comparison. Uses $this->options() by default.
+	 * @see FontAwesome::register() register() documents all client preference keys
+	 * @return array
+	 */
+	public function conflicts_by_client( $options = null ) {
+		if ( is_null( $this->conflicts_by_client ) ) {
+			$conflicts = array();
+
+			$options_for_comparison = is_null( $options ) ? $this->options() : $options;
+
+			foreach ( $this->client_preferences as $client_name => $client_preferences ) {
+				$current_conflicts = FontAwesome_Preference_Conflict_Detector::detect(
+					$options_for_comparison,
+					$client_preferences,
+					$this->latest_version()
 				);
 				if ( count( $current_conflicts ) > 0 ) {
 					$conflicts[ $client_name ] = $current_conflicts;
 				}
 			}
 
+			$this->conflicts_by_client = $conflicts;
+
+			return $conflicts;
+		} else {
+			return $this->conflicts_by_client;
+		}
+	}
+
+	/**
+	 * Return current client preferences for all registered clients.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * The website owner (i.e. the one who uses the WordPress admin dashboard) is considered a registered client.
+	 * So that owner's preferences will be represented here. But note that these preferences do not include
+	 * the `options`, as returned by {@see FortAwesome\FontAwesome::options()} which also help determine the
+	 * final result of how the Font Awesome assets are loaded.
+	 *
+	 * Each element of the array has the same shape as the preferences given to {@see FortAwesome\FontAwesome::register()}.
+	 *
+	 * @ignore
+	 * @internal
+	 * @see FortAwesome\FontAwesome::register()
+	 * @return array
+	 */
+	public function client_preferences() {
+		return $this->client_preferences;
+	}
+
+	/**
+	 * Return unregistered clients that have been detected and stored in the WordPress db.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * Unregistered clients are those for which the in-browser conflict detector
+	 * detects the presence of a Font Awesome version that is not being loaded by
+	 * this plugin, and therefore is likely causing a conflict.
+	 *
+	 * Client-side conflict detection is enabled in this plugin's setting page in WP admin.
+	 *
+	 * @ignore
+	 * @internal
+	 * @return array
+	 */
+	public function unregistered_clients() {
+		$conflict_detection = get_option( self::CONFLICT_DETECTION_OPTIONS_KEY );
+		if ( isset( $conflict_detection['unregisteredClients'] ) && is_array( $conflict_detection['unregisteredClients'] ) ) {
+			return $conflict_detection['unregisteredClients'];
+		} else {
+			return array();
+		}
+	}
+
+	/**
+	 * Indicates whether Font Awesome Pro is being loaded.
+	 *
+	 * It's a handy way to toggle the use of Pro icons in client theme or plugin template code.
+	 *
+	 * @since 4.0.0
+	 * @throws ConfigCorruptionException
+	 *
+	 * @return boolean
+	 */
+	public function pro() {
+		$options = $this->options();
+		$this->validate_options( $options );
+		return $options['usePro'];
+	}
+
+	/**
+	 * Indicates which Font Awesome technology is configured: 'webfont' or 'svg'.
+	 *
+	 * @since 4.0.0
+	 * @throws ConfigCorruptionException
+	 *
+	 * @return string
+	 */
+	public function technology() {
+		$options = $this->options();
+		$this->validate_options( $options );
+
+		return $options['technology'];
+	}
+
+	/**
+	 * Reports the version of Font Awesome assets being loaded, which may be "latest".
+	 *
+	 * Your theme or plugin can call this method in order to determine
+	 * whether all of the icons used in your templates will be available,
+	 * especially if you tend to use newer icons.
+	 *
+	 * It should be really easy for site owners to update to a new Font Awesome
+	 * version to accommodate your templates--just a simple dropdown selection
+	 * on the Font Awesome plugin settings page. You might need to show an admin
+	 * notice to nudge them to do so if you detect that the current version of
+	 * Font Awesome being loaded is older than you'd like.
+	 *
+	 * When Font Awesome is configured to use a kit, that kit may be configured
+	 * to load the "latest" version. The resolution of that symoblic "latest"
+	 * version happens internal to the kit's own loading logic, which is
+	 * outside the scope of this plugin.
+	 *
+	 * If your code needs to resolve what that concrete version will _probably_
+	 * be at runtime, you can take some extra steps after invoking this method
+	 * and seeing that it returns "latest".
+	 *
+	 * - `fa()->latest_version()` will only ever return the latest known
+	 *     concrete version of Font Awesome, as recently as the last time the
+	 *     releases metadata was queried from the Font Awesome API server.
+	 *
+	 * - `fa()->releases_refreshed_at()` will return the time when releases
+	 *     metadata was last refreshed.
+	 *
+	 * - `fa->refresh_releases()` will refresh the releases metadata. This will
+	 *     run a synchronous (blocking) network query to the Font Awesome API
+	 *     server.
+	 *
+	 * Therefore, if releases have been refreshed recently enough for your
+	 * purposes, you can rely on the version returned by `fa()->latest_version()`.
+	 * Or, you could refresh the releases metadata and then call
+	 * `fa()->latest_version()`.
+	 *
+	 * It is still possible that by the time the page loads in the browser,
+	 * a new release of Font Awesome will have become available since your
+	 * refresh of releases metadata, and will have been loaded as the "latest"
+	 * version for the kit. There's no way to guarantee that the latest version
+	 * you resolve by this method will be the one loaded at runtime. The race
+	 * condition is always possible. However, it is very unlikely, since these
+	 * are sub-second windows of time, and new versions of Font Awesome tend to
+	 * be released only approximately once per month.
+	 *
+	 * @since 4.0.0
+	 * @see FontAwesome::latest_version()
+	 * @see FontAwesome::releases_refreshed_at()
+	 * @see FontAwesome::refresh_releases()
+	 * @throws ConfigCorruptionException
+	 * @return string|null null if no version has yet been saved in the options
+	 * in the db. Otherwise, a valid version string, which may be either a
+	 * concrete version like "5.12.0" or the string "latest".
+	 */
+	public function version() {
+		$options = $this->options();
+		$this->validate_options( $options );
+
+		return $options['version'];
+	}
+
+	/**
+	 * Indicates whether Font Awesome is being loaded with version 4 compatibility.
+	 *
+	 * Its result is valid only after the `font_awesome_enqueued` has been triggered.
+	 *
+	 * @since 4.0.0
+	 * @throws ConfigCorruptionException
+	 *
+	 * @return boolean
+	 */
+	public function v4_compatibility() {
+		$options = $this->options();
+		$this->validate_options( $options );
+		return $options['v4Compat'];
+	}
+
+	/**
+	 * Indicates whether Font Awesome is being loaded with support for pseudo-elements.
+	 *
+	 * Its results are only valid after the `font_awesome_enqueued` action has been triggered.
+	 *
+	 * There are known performance problems with this SVG and pseudo-elements,
+	 * but it is provided for added compatibility where pseudo-elements must be used.
+	 *
+	 * Always returns true if technology() === 'webfont', because pseudo-elements
+	 * are always inherently supported by the CSS/Webfont technology.
+	 *
+	 * @since 4.0.0
+	 * @link https://fontawesome.com/how-to-use/on-the-web/advanced/css-pseudo-elements CSS Pseudo-Elements and Font Awesome
+	 * @throws ConfigCorruptionException
+	 * @return boolean
+	 */
+	public function pseudo_elements() {
+		$options = $this->options();
+		$this->validate_options( $options );
+
+		return $options['pseudoElements'];
+	}
+
+	/**
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 */
+	protected function specified_preference_or_default( $preference, $default ) {
+		return array_key_exists( 'value', $preference ) ? $preference['value'] : $default;
+	}
+
+	/**
+	 * Enqueues the JavaScript bundle that is the React app for the admin
+	 * settings page as well as the conflict detection reporter.
+	 *
+	 * The same bundle will be enqueued for both purposes. When enqueued, it
+	 * must be configured to indicate which React components to mount in the DOM,
+	 * which may be either, both, or neither.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 */
+	public function maybe_enqueue_admin_js_bundle() {
+		add_action(
+			'admin_enqueue_scripts',
+			function( $hook ) {
+				try {
+					if ( $this->detecting_conflicts() || $hook === $this->screen_id ) {
+						// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+						wp_enqueue_script(
+							self::ADMIN_RESOURCE_HANDLE,
+							$this->get_webpack_asset_url( 'main.js' ),
+							[],
+							null,
+							true
+						);
+					}
+
+					if ( $hook === $this->screen_id ) {
+						$this->maybe_refresh_releases();
+
+						if ( FONTAWESOME_ENV !== 'development' ) {
+							// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+							wp_enqueue_style(
+								self::ADMIN_RESOURCE_HANDLE . '-css',
+								$this->get_webpack_asset_url( 'main.css' ),
+								[],
+								null,
+								'all'
+							);
+						}
+
+						wp_localize_script(
+							self::ADMIN_RESOURCE_HANDLE,
+							self::ADMIN_RESOURCE_LOCALIZATION_NAME,
+							array_merge(
+								$this->common_data_for_js_bundle(),
+								array(
+									'showAdmin'            => true,
+									'onSettingsPage'       => true,
+									'clientPreferences'    => $this->client_preferences(),
+									'releases'             => array(
+										'available'      => $this->release_provider()->versions(),
+										'latest_version' => $this->latest_version(),
+									),
+									'pluginVersion'        => FontAwesome::PLUGIN_VERSION,
+									'preferenceConflicts'  => $this->conflicts_by_option(),
+									'v3DeprecationWarning' => $this->get_v3deprecation_warning_data(),
+								)
+							)
+						);
+					} else {
+						wp_localize_script(
+							self::ADMIN_RESOURCE_HANDLE,
+							self::ADMIN_RESOURCE_LOCALIZATION_NAME,
+							$this->common_data_for_js_bundle()
+						);
+					}
+				} catch ( Exception $e ) {
+					notify_admin_fatal_error( $e );
+				} catch ( Error $e ) {
+					notify_admin_fatal_error( $e );
+				}
+			}
+		);
+
+		if ( $this->detecting_conflicts() && current_user_can( 'manage_options' ) ) {
+			foreach ( [ 'wp_enqueue_scripts', 'login_enqueue_scripts' ] as $action ) {
+				add_action(
+					$action,
+					function () {
+						try {
+							// phpcs:ignore WordPress.WP.EnqueuedResourceParameters
+							wp_enqueue_script(
+								self::ADMIN_RESOURCE_HANDLE,
+								$this->get_webpack_asset_url( 'main.js' ),
+								null,
+								null,
+								false
+							);
+
+							wp_localize_script(
+								self::ADMIN_RESOURCE_HANDLE,
+								self::ADMIN_RESOURCE_LOCALIZATION_NAME,
+								array_merge(
+									$this->common_data_for_js_bundle(),
+									array(
+										'onSettingsPage' => false,
+										'showAdmin'      => false,
+										'showConflictDetectionReporter' => true,
+									)
+								)
+							);
+						} catch ( Exception $e ) {
+							notify_admin_fatal_error( $e );
+						} catch ( Error $e ) {
+							notify_admin_fatal_error( $e );
+						}
+					}
+				);
+			}
+		}
+	}
+
+	/**
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @ignore
+	 * @internal
+	 */
+	public function common_data_for_js_bundle() {
+		return array(
+			'apiNonce'                      => wp_create_nonce( 'wp_rest' ),
+			'apiUrl'                        => rest_url( self::REST_API_NAMESPACE ),
+			'detectConflictsUntil'          => $this->detect_conflicts_until(),
+			'unregisteredClients'           => $this->unregistered_clients(),
+			'showConflictDetectionReporter' => $this->detecting_conflicts(),
+			'settingsPageUrl'               => $this->settings_page_url(),
+			'activeAdminTab'                => $this->active_admin_tab(),
+			'options'                       => $this->options(),
+		);
+	}
+
+	/**
+	 * Enqueues a kit loader <script>.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * A proper kit loader <script>  looks like this:
+	 *
+	 * <script src="https://kit.fontawesome.com/deadbeef00.js" crossorigin="anonymous"></script>
+	 *
+	 * where deadbeef00 is the kitToken
+	 *
+	 * @ignore
+	 * @internal
+	 * @throws ConfigCorruptionException if the kit_token is not a string
+	 */
+	public function enqueue_kit( $kit_token ) {
+		if ( ! is_string( $kit_token ) ) {
+			throw new ConfigCorruptionException();
+		}
+
+		foreach ( [ 'wp_enqueue_scripts', 'admin_enqueue_scripts', 'login_enqueue_scripts' ] as $action ) {
+			$enqueue_command = new FontAwesome_Command(
+				function () use ( $kit_token ) {
+					try {
+						// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+						wp_enqueue_script(
+							FontAwesome::RESOURCE_HANDLE,
+							trailingslashit( FONTAWESOME_KIT_LOADER_BASE_URL ) . $kit_token . '.js',
+							[],
+							null,
+							false
+						);
+
+						/**
+						 * Kits have built-in support for detecting conflicts, but we need to
+						 * inject some configuration to turn it on. We will do that by manipulating
+						 * the FontAwesomeKitConfig global property.
+						 */
+						if ( fa()->detecting_conflicts() ) {
+							/**
+							 * Kits Conflict Detection expects this value to be in milliseconds
+							 * since the unix epoch.
+							 */
+							$detect_conflicts_until = fa()->detect_conflicts_until() * 1000;
+
+							$script_content = <<< EOT
+window.__FontAwesome__WP__KitConfig__ = {
+	detectConflictsUntil: ${detect_conflicts_until}
+}
+
+Object.defineProperty(window, 'FontAwesomeKitConfig', {
+	enumerable: true,
+	configurable: false,
+	get() { return window.__FontAwesome__WP__KitConfig__ },
+	set( newValue ) {
+		var newValueCopy = Object.assign({}, newValue)
+		window.__FontAwesome__WP__KitConfig__ = Object.assign(newValueCopy, window.__FontAwesome__WP__KitConfig__)
+	}
+})
+EOT;
+
+							wp_add_inline_script(
+								FontAwesome::RESOURCE_HANDLE,
+								$script_content,
+								'before'
+							);
+						}
+					} catch ( Exception $e ) {
+						notify_admin_fatal_error( $e );
+					} catch ( Error $e ) {
+						notify_admin_fatal_error( $e );
+					}
+				}
+			);
+			add_action(
+				$action,
+				[ $enqueue_command, 'run' ]
+			);
+		}
+
+		$script_loader_tag_command = new FontAwesome_Command(
+			function ( $html, $handle ) {
+				$revised_html = $html;
+
+				/**
+				 * Set the crossorigin attr to ensure that the Origin header is
+				 * by the browser when the kit loader script is loaded.
+				 * Needed for authorization.
+				 */
+				if ( self::RESOURCE_HANDLE === $handle ) {
+					$revised_html = preg_replace(
+						'/<script[\s]+(.*?)>/',
+						'<script crossorigin="anonymous" \1>',
+						$revised_html
+					);
+				}
+
+				return $revised_html;
+			}
+		);
+
+		add_filter(
+			'script_loader_tag',
+			[ $script_loader_tag_command, 'run' ],
+			11,
+			2
+		);
+
+		if ( $this->detecting_conflicts() ) {
+			$this->apply_detection_ignore_attr();
+		}
+
+		$this->common_enqueue_actions();
+	}
+
+	/**
+	 * Enqueues <script> or <link> resources to load from Font Awesome 5 free or pro cdn.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 * @param $options
+	 * @param FontAwesome_ResourceCollection $resource_collection
+	 * @throws ConfigCorruptionException
+	 */
+	public function enqueue_cdn( $options, $resource_collection ) {
+		if ( ! array_key_exists( 'pseudoElements', $options ) ) {
+			throw new ConfigCorruptionException();
+		}
+
+		if ( ! array_key_exists( 'usePro', $options ) ) {
+			throw new ConfigCorruptionException();
+		}
+
+		if ( ! array_key_exists( 'version', $options ) ) {
+			throw new ConfigCorruptionException();
+		}
+
+		if ( ! ( array_key_exists( 'technology', $options ) && ( 'svg' === $options['technology'] || 'webfont' === $options['technology'] ) ) ) {
+			throw new ConfigCorruptionException();
+		}
+
+		$resources = $resource_collection->resources();
+
+		$conflict_detection_enqueue_command = new FontAwesome_Command(
+			function () {
+				// phpcs:ignore WordPress.WP.EnqueuedResourceParameters
+				wp_enqueue_script(
+					FontAwesome::RESOURCE_HANDLE_CONFLICT_DETECTOR,
+					FontAwesome::CONFLICT_DETECTOR_SOURCE,
+					[ FontAwesome::ADMIN_RESOURCE_HANDLE ],
+					null,
+					true
+				);
+			}
+		);
+
+		if ( $this->detecting_conflicts() && current_user_can( 'manage_options' ) ) {
+			// Enqueue the conflict detector.
+			foreach ( [ 'wp_enqueue_scripts', 'admin_enqueue_scripts', 'login_enqueue_scripts' ] as $action ) {
+				add_action(
+					$action,
+					[ $conflict_detection_enqueue_command, 'run' ],
+					PHP_INT_MAX
+>>>>>>> woocommerce
+				);
+				if ( count( $current_conflicts ) > 0 ) {
+					$conflicts[ $client_name ] = $current_conflicts;
+				}
+			}
+
+<<<<<<< HEAD
 			$this->conflicts_by_client = $conflicts;
 
 			return $conflicts;
@@ -1667,6 +3027,63 @@ EOT;
 
 							$license_subdomain = boolval( $options['usePro'] ) ? 'pro' : 'use';
 
+=======
+			$this->apply_detection_ignore_attr();
+		}
+
+		if ( 'webfont' === $options['technology'] ) {
+			foreach ( [ 'wp_enqueue_scripts', 'admin_enqueue_scripts', 'login_enqueue_scripts' ] as $action ) {
+				add_action(
+					$action,
+					function () use ( $resources ) {
+						// phpcs:ignore WordPress.WP.EnqueuedResourceParameters
+						wp_enqueue_style( self::RESOURCE_HANDLE, $resources[0]->source(), null, null );
+					}
+				);
+			}
+
+			// Filter the <link> tag to add the integrity and crossorigin attributes for completeness.
+			add_filter(
+				'style_loader_tag',
+				function( $html, $handle ) use ( $resources ) {
+					if ( in_array( $handle, [ self::RESOURCE_HANDLE ], true ) ) {
+								return preg_replace(
+									'/\/>$/',
+									'integrity="' . $resources[0]->integrity_key() .
+									'" crossorigin="anonymous" />',
+									$html,
+									1
+								);
+					} else {
+								return $html;
+					}
+				},
+				10,
+				2
+			);
+
+			if ( ! array_key_exists( 'v4Compat', $options ) ) {
+				throw new ConfigCorruptionException();
+			}
+
+			$version = $resource_collection->version();
+
+			if ( $options['v4Compat'] ) {
+				/**
+				 * Enqueue v4 compatibility as late as possible, though still within the normal script enqueue hooks.
+				 * We need the @font-face override, especially to appear after any unregistered loads of Font Awesome
+				 * that may try to declare a @font-face with a font-family of "FontAwesome".
+				 */
+				foreach ( [ 'wp_enqueue_scripts', 'admin_enqueue_scripts', 'login_enqueue_scripts' ] as $action ) {
+					add_action(
+						$action,
+						function () use ( $resources, $options, $version ) {
+							// phpcs:ignore WordPress.WP.EnqueuedResourceParameters
+							wp_enqueue_style( self::RESOURCE_HANDLE_V4SHIM, $resources[1]->source(), null, null );
+
+							$license_subdomain = boolval( $options['usePro'] ) ? 'pro' : 'use';
+
+>>>>>>> woocommerce
 							$font_face = <<< EOT
 @font-face {
 font-family: "FontAwesome";
@@ -1842,6 +3259,8 @@ EOT;
 						'<link ' . self::CONFLICT_DETECTION_IGNORE_ATTR . ' \1>',
 						$html,
 						1
+<<<<<<< HEAD
+=======
 					);
 				} else {
 					return $html;
@@ -1850,6 +3269,39 @@ EOT;
 			11, // later than the integrity and crossorigin attr filter.
 			2
 		);
+
+		add_filter(
+			'script_loader_tag',
+			function ( $html, $handle ) {
+				if (
+					in_array(
+						$handle,
+						array_merge(
+							[
+								self::RESOURCE_HANDLE,
+								self::RESOURCE_HANDLE_V4SHIM,
+								self::RESOURCE_HANDLE_CONFLICT_DETECTOR,
+								self::ADMIN_RESOURCE_HANDLE,
+							],
+							handles_ignored_for_conflict_detection()
+						),
+						true
+					)
+				) {
+					return preg_replace(
+						'/<script(.*?)>/',
+						'<script ' . self::CONFLICT_DETECTION_IGNORE_ATTR . ' \1>',
+						$html
+>>>>>>> woocommerce
+					);
+				} else {
+					return $html;
+				}
+			},
+			11, // later than the integrity and crossorigin attr filter.
+			2
+		);
+<<<<<<< HEAD
 
 		add_filter(
 			'script_loader_tag',
@@ -1883,6 +3335,10 @@ EOT;
 		);
 	}
 
+=======
+	}
+
+>>>>>>> woocommerce
 	/**
 	 * Things that are done whether we are configured to enqueue Kit or CDN resources.
 	 *
@@ -1923,6 +3379,7 @@ EOT;
 		 * We'll use priority PHP_INT_MAX in an effort to run as late as possible,
 		 * hopefully allowing any unregistered client to have already enqueued
 		 * itself so that our attempt to dequeue it will be successful.
+<<<<<<< HEAD
 		 */
 		foreach ( [ 'wp_enqueue_scripts', 'admin_enqueue_scripts', 'login_enqueue_scripts' ] as $action ) {
 			add_action(
@@ -1985,6 +3442,70 @@ EOT;
 					 */
 					$md5 = md5( $details->src );
 
+=======
+		 */
+		foreach ( [ 'wp_enqueue_scripts', 'admin_enqueue_scripts', 'login_enqueue_scripts' ] as $action ) {
+			add_action(
+				$action,
+				function() {
+					try {
+						fa()->remove_blocklist();
+					} catch ( Exception $e ) {
+						notify_admin_fatal_error( $e );
+					} catch ( Error $e ) {
+						notify_admin_fatal_error( $e );
+					}
+				},
+				PHP_INT_MAX
+			);
+		}
+
+		/**
+		 * Fired when the plugin has enqueued a version of Font Awesome. Callback functions on this action
+		 * will be able to query the various accessor methods on the FontAwesome object to discover that configuration.
+		 *
+		 * @since 4.0.0
+		 */
+		do_action( 'font_awesome_enqueued' );
+	}
+
+	/**
+	 * Updates the unregistered clients option and blocklist with any enqueued
+	 * styles or scripts whose src matches 'fontawesome' or 'font-awesome'.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @internal
+	 * @ignore
+	 */
+	private function infer_unregistered_clients_by_resource_url() {
+		$wp_styles  = wp_styles();
+		$wp_scripts = wp_scripts();
+
+		$collections = array(
+			'style'  => $wp_styles,
+			'script' => $wp_scripts,
+		);
+
+		$inferred_unregistered_clients = [];
+
+		foreach ( $collections as $key => $collection ) {
+			foreach ( $collection->registered as $handle => $details ) {
+				if ( preg_match( '/' . self::RESOURCE_HANDLE . '/', $handle )
+					|| preg_match( '/' . self::RESOURCE_HANDLE . '/', $handle ) ) {
+					continue;
+				}
+				if ( strpos( $details->src, 'fontawesome' ) || strpos( $details->src, 'font-awesome' ) ) {
+					/**
+					 * For each match we find, we'll update both the main option's
+					 * blocklist, and the unregistered clients option.
+					 *
+					 * We'll accumulate those matches in these data structures,
+					 * and then call update_option() once for each option at the end.
+					 */
+					$md5 = md5( $details->src );
+
+>>>>>>> woocommerce
 					$inferred_unregistered_clients[ $md5 ] = array(
 						'src'     => $details->src,
 						'type'    => $key,
@@ -2002,16 +3523,119 @@ EOT;
 				array(
 					'unregisteredClients' => $inferred_unregistered_clients,
 				)
+<<<<<<< HEAD
 			);
 
 			update_option(
 				self::CONFLICT_DETECTION_OPTIONS_KEY,
 				$new_option
+=======
+>>>>>>> woocommerce
 			);
 		}
 	}
 
 	/**
+	 * Reports whether the given url should be blocked based on an
+	 * md5 hash of its value.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @ignore
+	 * @internal
+	 * @return bool
+	 */
+	public function is_url_blocked( $url ) {
+		return false !== array_search( md5( $url ), $this->blocklist(), true );
+	}
+
+<<<<<<< HEAD
+	/**
+	 * Reports whether the given inline data should be blocked based on an
+	 * md5 hash of its contents.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * @ignore
+	 * @internal
+	 * @return bool
+	 */
+	public function is_inline_data_blocked( $data ) {
+		/**
+		 * As of WordPress 5.2.2, both WP_Styles::print_inline_style and WP_Scripts::print_inline_script
+		 * join (implode) the set of 'before' or 'after' resources with a newline, and then wrap the whole
+		 * thing in newlines when printing the <style> or <script> tag. So that's how we'll have to
+		 * reconstruct those inline resources here in order to produce the same input for the md5 function
+		 * that would have been used by the Conflict Detector in the browser.
+		 *
+		 * Since this newline handling is not documenting as part of the spec, we're admittedly at some risk
+		 * of this changing out from under us. At worst, if that implementation detail changes, it
+		 * will just mean that we get a false negative when matching for blocked elements.
+		 * Nothing will crash, but a conflict that we'd intended to catch will
+		 * have slipped through. Our automated test suite should catch this, though.
+		 */
+		if ( $data && is_array( $data ) && count( $data ) > 0 ) {
+			return false !== array_search( md5( "\n" . implode( "\n", $data ) . "\n" ), $this->blocklist(), true );
+		} else {
+			return false;
+=======
+			update_option(
+				self::CONFLICT_DETECTION_OPTIONS_KEY,
+				$new_option
+			);
+>>>>>>> woocommerce
+		}
+	}
+
+	/**
+<<<<<<< HEAD
+	 * Removes detect conflicts marked for blocking.
+	 *
+	 * Internal use only, not part of this plugin's public API.
+	 *
+	 * For each handle, we need to check whether there's a conflict for the base resource itself,
+	 * on its "src" attribute (the URL of an external script or stylesheet).
+	 * We also need to check the 'before' and 'after' data for every resource to see if it has
+	 * any inline style or script data associated with it. For our purposes, these are independent potential
+	 * sources of conflict. In other words, the Conflict Detector reports md5 checksums for every external
+	 * or inline style and script without reference to each other. So the only way we can know that we've
+	 * found all of the conflicts is to make sure that we've inspected all of the inline styles and scripts.
+	 * And the only way we can know that we've done that is to look at all of the 'before' and 'after' data
+	 * for every resource.
+	 *
+	 * If we dequeue the main asset, then it automatically gets rid of any associated inline styles or scripts,
+	 * so we can skip looking for those. Hopefully, it's a rare-to-never case that there's a conflict
+	 * with the main resource AND something we need to keep in that resource's "before" or "after" extras.
+	 * In that case, removal of the main resource will be too greedy / aggressive. We seem to be
+	 * at the mercy of how WordPress handles inline styles and scripts--that is, inline styles
+	 * or scripts are always added to some other "main" asset which has its own resource handle.
+	 *
+	 * @ignore
+	 * @internal
+	 */
+	protected function remove_blocklist() {
+		if ( count( $this->blocklist() ) === 0 ) {
+			return;
+		}
+
+		$wp_styles  = wp_styles();
+		$wp_scripts = wp_scripts();
+
+		$collections = array(
+			'style'  => $wp_styles,
+			'script' => $wp_scripts,
+		);
+
+		foreach ( $collections as $type => $collection ) {
+			foreach ( $collection->registered as $handle => $details ) {
+				foreach ( [ 'before', 'after' ] as $position ) {
+					$data = $collection->get_data( $handle, $position );
+					if ( $this->is_inline_data_blocked( $data ) ) {
+						unset( $collection->registered[ $handle ]->extra[ $position ] );
+					}
+				}
+
+=======
 	 * Reports whether the given url should be blocked based on an
 	 * md5 hash of its value.
 	 *
@@ -2103,6 +3727,7 @@ EOT;
 					}
 				}
 
+>>>>>>> woocommerce
 				if ( $this->is_url_blocked( $details->src ) ) {
 					call_user_func( "wp_dequeue_$type", $handle );
 				}

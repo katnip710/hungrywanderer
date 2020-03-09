@@ -15,43 +15,55 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( '#', 'travel-theme' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( '%s', 'travel-theme' ), 'Privacy Policy' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<a href="#">Developers API</a>' );
-				?>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<a href="#">Site Map</a>' );
-				?>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<a href="#">Terms & Conditions</a>' );
-				?>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<i href="#" class="fab fa-facebook-square"></i>' );
-				?>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<i href="#" class="fab fa-instagram"></i>' );
-				?>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<i href="#" class="fab fa-twitter"></i>' );
-				?>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s', 'travel-theme' ), '<i href="#" class="fab fa-youtube"></i>' );
-				?>
+		<?php
+			if (has_nav_menu ('footer-menu')) {
+					$args = array(
+						'theme_location' => 'footer-menu',
+						'after' => ' | ',
+						'container' => 'div',
+					);
+					wp_nav_menu( $args );
+				}
+		?>
+		<!-- // Use the customizer control that has been set -->
+		<?php if ( get_theme_mod('travel_theme_facebook_url') || get_theme_mod('travel_theme_twitter_url') || get_theme_mod('travel_theme_instagram_url') || get_theme_mod('travel_theme_youtube_url') ) { ?>
+			<div class="social-media-section">
+				<ul class="social-media">
+					<?php if ( get_theme_mod( 'travel_theme_facebook_url' ) ) { ?>
+						<li class="facebook">
+							<a href="<?php echo get_theme_mod( 'travel_theme_facebook_url' ); ?>">
+								<!-- <i href="#" class="fab fa-facebook-square"></i> -->
+								<img src="<?php echo get_template_directory_uri() . '/assets/images/icons/facebook.svg'; ?>" alt="<?php echo esc_html__( 'Facebook', 'travel_theme' ); ?>" height="35" width="35">
+							</a>
+						</li>
+					<?php } ?>
+					<?php if ( get_theme_mod( 'travel_theme_twitter_url' ) ) { ?>
+						<li class="twitter">
+							<a href="<?php echo get_theme_mod( 'travel_theme_twitter_url' ); ?>">
+								<!-- <i href="#" class="fab fa-twitter"></i> -->
+								<img src="<?php echo get_template_directory_uri() . '/assets/images/icons/twitter.svg'; ?>" alt="<?php echo esc_html__( 'Twitter', 'travel_theme' ); ?>" height="35" width="35">
+							</a>
+						</li>
+					<?php } ?>
+					<?php if ( get_theme_mod( 'travel_theme_instagram_url' ) ) { ?>
+						<li class="instagram">
+							<a href="<?php echo get_theme_mod( 'travel_theme_instagram_url' ); ?>">
+							<!-- <i href="#" class="fab fa-instagram"></i> -->
+							<img src="<?php echo get_template_directory_uri() . '/assets/images/icons/instagram.svg'; ?>" alt="<?php echo esc_html__( 'Instagram', 'travel_theme' ); ?>" height="35" width="35">
+							</a>
+						</li>
+					<?php } ?>
+					<?php if ( get_theme_mod( 'travel_theme_youtube_url' ) ) { ?>
+						<li class="youtube">
+							<a href="<?php echo get_theme_mod( 'travel_theme_youtube_url' ); ?>">
+								<!-- <i href="#" class="fab fa-youtube"></i> -->
+								<img src="<?php echo get_template_directory_uri() . '/assets/images/icons/youtube.svg'; ?>" alt="<?php echo esc_html__( 'Youtube', 'travel_theme' ); ?>" height="35" width="35">
+							</a>
+						</li>
+					<?php } ?>
+				</ul>
+			</div>
+		<?php } ?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
