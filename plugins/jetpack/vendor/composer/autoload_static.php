@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb971f5b5f09f65d7b815d2961dc675a0
+class ComposerStaticInitcc63bc401fb847c27bc52a1b6ff9376f
 {
     public static $files = array (
         'bce4ecd6aabb2a2948e06d0e2c4ea9a6' => __DIR__ . '/..' . '/automattic/jetpack-connection/legacy/load-ixr.php',
@@ -51,6 +51,7 @@ class ComposerStaticInitb971f5b5f09f65d7b815d2961dc675a0
         'Automattic\\Jetpack\\Sync\\Codec_Interface' => __DIR__ . '/..' . '/automattic/jetpack-sync/src/interface-codec.php',
         'Automattic\\Jetpack\\Sync\\Defaults' => __DIR__ . '/..' . '/automattic/jetpack-sync/src/class-defaults.php',
         'Automattic\\Jetpack\\Sync\\Functions' => __DIR__ . '/..' . '/automattic/jetpack-sync/src/class-functions.php',
+        'Automattic\\Jetpack\\Sync\\Health' => __DIR__ . '/..' . '/automattic/jetpack-sync/src/class-health.php',
         'Automattic\\Jetpack\\Sync\\JSON_Deflate_Array_Codec' => __DIR__ . '/..' . '/automattic/jetpack-sync/src/class-json-deflate-array-codec.php',
         'Automattic\\Jetpack\\Sync\\Listener' => __DIR__ . '/..' . '/automattic/jetpack-sync/src/class-listener.php',
         'Automattic\\Jetpack\\Sync\\Lock' => __DIR__ . '/..' . '/automattic/jetpack-sync/src/class-lock.php',
@@ -108,9 +109,9 @@ class ComposerStaticInitb971f5b5f09f65d7b815d2961dc675a0
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb971f5b5f09f65d7b815d2961dc675a0::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb971f5b5f09f65d7b815d2961dc675a0::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitb971f5b5f09f65d7b815d2961dc675a0::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcc63bc401fb847c27bc52a1b6ff9376f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcc63bc401fb847c27bc52a1b6ff9376f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitcc63bc401fb847c27bc52a1b6ff9376f::$classMap;
 
         }, null, ClassLoader::class);
     }
