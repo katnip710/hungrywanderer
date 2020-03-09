@@ -949,9 +949,11 @@ ul {
 }
 
 .woocommerce-message {
-	position: absolute;
+	/* position: absolute;
 	top: 30%;
-	left: 31%	
+	left: 31%	 */
+	width: 50%;
+	margin: 0 auto 30px auto
 }
 
 .woocommerce-message a {
@@ -971,12 +973,11 @@ ul {
 }
 
 /* CART PAGE STYLING */
-
 .page-id-93 .has-text-align-center {
 	font-family: 'Just Another Hand', cursive;
 	font-size: 6vh;
 	letter-spacing: 1vh;
-	margin: -100px 0 30px 0
+	margin: -40px 0 30px 0
 }
 
 .page-id-93 .product-thumbnail img {
@@ -1039,9 +1040,57 @@ ul {
 	background-color: #6AAADE;
 	font-size: 20px;
 	font-weight: 800;
-	padding: 8px 12px
+	padding: 8px 12px;
+	border-radius: 4px
 }
 
+/* CHECKOUT PAGE STYLING */
+
+.page-id-9 .form-row {
+	margin: 16px 0
+}
+
+.page-id-9 input {
+	margin-left: 10px;
+	padding: 2px
+}
+
+.woocommerce-additional-fields {
+	margin-top: 35px
+}
+
+.form-row textarea {
+	margin-left: 10px;
+	padding: 3px;
+	width: 280px;
+	height: 100px
+}
+
+#order_review_heading {
+	margin-top: 35px;
+}
+
+.wc_payment_method label,
+.payment_box p {
+	display: none
+}
+
+#place_order {
+	color: white;
+	background-color: #6AAADE;
+	font-size: 22px;
+	font-weight: 800;
+	padding: 8px 12px;
+	margin-top: 30px
+}
+
+.page-id-9 .woocommerce-info {
+	display: none
+}
+
+.woocommerce-privacy-policy-text {
+	color: #696969
+}
 
 
 
