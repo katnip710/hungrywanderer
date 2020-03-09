@@ -13,6 +13,7 @@ Thumbs.db
 
 #WordPress folders and files
 /uploads/
+/plugins/
 
 #WordPress plugins
 /transition-slider-lite/
