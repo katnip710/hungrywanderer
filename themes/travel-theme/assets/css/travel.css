@@ -84,7 +84,12 @@ footer .menu-item:nth-last-child(1) {
 }
 
 .social-media li {
-	margin-left: -0.5vw;
+	margin-left: 0.5vw;
+}
+
+.social-media {
+	text-align: right;
+    margin-right: 3vw;
 }
 
 /* MENU */

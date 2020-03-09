@@ -32,28 +32,32 @@
 					<?php if ( get_theme_mod( 'travel_theme_facebook_url' ) ) { ?>
 						<li class="facebook">
 							<a href="<?php echo get_theme_mod( 'travel_theme_facebook_url' ); ?>">
-								<i href="#" class="fab fa-facebook-square"></i>
+								<!-- <i href="#" class="fab fa-facebook-square"></i> -->
+								<img src="<?php echo get_template_directory_uri() . '/assets/images/icons/facebook.svg'; ?>" alt="<?php echo esc_html__( 'Facebook', 'travel_theme' ); ?>" height="35" width="35">
 							</a>
 						</li>
 					<?php } ?>
 					<?php if ( get_theme_mod( 'travel_theme_twitter_url' ) ) { ?>
 						<li class="twitter">
 							<a href="<?php echo get_theme_mod( 'travel_theme_twitter_url' ); ?>">
-								<i href="#" class="fab fa-twitter"></i>
+								<!-- <i href="#" class="fab fa-twitter"></i> -->
+								<img src="<?php echo get_template_directory_uri() . '/assets/images/icons/twitter.svg'; ?>" alt="<?php echo esc_html__( 'Twitter', 'travel_theme' ); ?>" height="35" width="35">
 							</a>
 						</li>
 					<?php } ?>
 					<?php if ( get_theme_mod( 'travel_theme_instagram_url' ) ) { ?>
 						<li class="instagram">
 							<a href="<?php echo get_theme_mod( 'travel_theme_instagram_url' ); ?>">
-							<i href="#" class="fab fa-instagram"></i>
+							<!-- <i href="#" class="fab fa-instagram"></i> -->
+							<img src="<?php echo get_template_directory_uri() . '/assets/images/icons/instagram.svg'; ?>" alt="<?php echo esc_html__( 'Instagram', 'travel_theme' ); ?>" height="35" width="35">
 							</a>
 						</li>
 					<?php } ?>
 					<?php if ( get_theme_mod( 'travel_theme_youtube_url' ) ) { ?>
 						<li class="youtube">
 							<a href="<?php echo get_theme_mod( 'travel_theme_youtube_url' ); ?>">
-								<i href="#" class="fab fa-youtube"></i>
+								<!-- <i href="#" class="fab fa-youtube"></i> -->
+								<img src="<?php echo get_template_directory_uri() . '/assets/images/icons/youtube.svg'; ?>" alt="<?php echo esc_html__( 'Youtube', 'travel_theme' ); ?>" height="35" width="35">
 							</a>
 						</li>
 					<?php } ?>
