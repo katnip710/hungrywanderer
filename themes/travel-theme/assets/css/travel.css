@@ -906,6 +906,10 @@ ul {
 	display: none
 }
 
+.page-id-7 ul li {
+	text-align: center
+}
+
 .page-id-7 .type-product .price {
 	margin: 0
 }
@@ -937,10 +941,6 @@ ul {
 	letter-spacing: 1vh;
 	margin-top: -30px
 }
-
-/* #post-257 {
-	display: none
-} */
 
 .mini_cart_item,
 .woocommerce-mini-cart__total,
