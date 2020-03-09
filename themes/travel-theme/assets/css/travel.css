@@ -970,5 +970,79 @@ ul {
 	padding: 15px
 }
 
+/* CART PAGE STYLING */
+
+.page-id-93 .has-text-align-center {
+	font-family: 'Just Another Hand', cursive;
+	font-size: 6vh;
+	letter-spacing: 1vh;
+	margin: -100px 0 30px 0
+}
+
+.page-id-93 .product-thumbnail img {
+	display: none
+}
+
+.page-id-93 label {
+	display: none
+}
+
+.page-id-93 main {
+	max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 4rem
+}
+
+.product-name,
+.product-price,
+.product-quantity,
+.product-subtotal {
+	padding: 9px 40px;
+	font-size: 18px
+}
+
+.woocommerce-cart-form__cart-item .remove {
+	color: red;
+	text-decoration: none
+}
+
+.woocommerce-cart-form {
+	text-align: right
+}
+
+.product-name a {
+	text-decoration: none;
+	font-size: 20px;
+	color: #1d1d1d
+}
+
+.actions .button {
+	color: white;
+	background-color: #6ADE9E;
+	font-size: 18px;
+	padding: 5px 10px;
+	margin: 10px
+}
+
+.cart_totals {
+	margin-top: 30px;
+    padding-left: 52vw
+}
+
+.wc-proceed-to-checkout {
+	margin-top: 20px;
+}
+
+.wc-proceed-to-checkout a {
+	text-decoration: none;
+	color: white;
+	background-color: #6AAADE;
+	font-size: 20px;
+	font-weight: 800;
+	padding: 8px 12px
+}
+
+
+
 
 
