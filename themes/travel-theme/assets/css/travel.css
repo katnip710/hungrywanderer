@@ -1171,6 +1171,16 @@ table th, table td {
 	margin-top: 15px;
 }
 
+.woocommerce-EditAccountForm p {
+	margin: 8px 0
+}
+
+.woocommerce-EditAccountForm p button {
+	background-color: #808080;
+	color: white;
+	padding: 5px 10px	
+}
+
 
 
 
