@@ -1198,6 +1198,37 @@ table th, table td {
 	color: black
 }
 
+.woocommerce-order-details__title {
+	margin-top: 30px
+}
+
+.page-id-33 .entry-summary,
+.page-id-7 .entry-summary,
+.page-id-34 .entry-summary,
+.page-id-35 .entry-summary,
+.page-id-36 .entry-summary {
+	display: none
+}
+
+.single-product .entry-summary h2 {
+	display: none
+}
+
+#product-278 .woocommerce-product-details__short-description h2,
+#product-257 .woocommerce-product-details__short-description h2,
+#product-276 .woocommerce-product-details__short-description h2,
+#product-255 .woocommerce-product-details__short-description h2,
+#product-235 .woocommerce-product-details__short-description h2,
+#product-269 .woocommerce-product-details__short-description h2,
+#product-238 .woocommerce-product-details__short-description h2,
+#product-280 .woocommerce-product-details__short-description h2,
+#product-251 .woocommerce-product-details__short-description h2,
+#product-274 .woocommerce-product-details__short-description h2,
+#product-249 .woocommerce-product-details__short-description h2,
+#product-272 .woocommerce-product-details__short-description h2 {
+	display: block
+}
+
 
 
 
