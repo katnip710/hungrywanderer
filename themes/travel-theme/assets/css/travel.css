@@ -1151,6 +1151,22 @@ ul {
     color: black
 }
 
+table{
+    border-collapse: collapse;
+}
+table thead tr th{
+	border-top: 1px solid #808080;
+    border-bottom: 1px solid #808080
+}
+table th, table td {
+    border-left: 1px solid #808080;
+	border-right: 1px solid #808080;
+	border-bottom: 1px solid #808080
+}
+table th, table td { 
+    padding: 4px 8px;
+}
+
 
 
 
