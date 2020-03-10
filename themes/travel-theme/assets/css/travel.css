@@ -1114,9 +1114,40 @@ ul {
 	padding: 0 6vw
 }
 
-/* PAGE TITLE STYLING ON BLOG PAGE */
-#post-36 h1 {
+/* STYLING ON BLOG PAGE */
+.blog header h1,
+.blog .entry-header {
 	text-align: center;
+}
+
+.blog .entry-header a {
+	text-decoration: none;
+	color: black
+}
+
+.blog .entry-content .wp-block-cover__inner-container{
+	display: none
+}
+
+.blog .entry-header .has-text-color {
+	display: none
+}
+
+.blog .entry-content h2 {
+	color: #6AAADE
+}
+
+.blog .entry-footer {
+	display: none;
+}
+
+.blog .entry-title {
+	margin-top: 80px;
+}
+
+.blog .entry-content .has-text-align-center,
+.blog .entry-summary p {
+	padding: 0 5vw
 }
 
 /* PAGE TITLE STYLING ON CONTACT PAGE */
