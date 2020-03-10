@@ -1112,6 +1112,20 @@ ul {
 	text-align: center
 }
 
+/* STYLING ON MY ACCOUNT PAGE */
+.woocommerce-MyAccount-navigation {
+	display: inline-block;
+	border: 2px solid black
+}
+
+#post-10 .woocommerce {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+
+}
+
 
 
 
