@@ -1032,11 +1032,17 @@ ul {
 
 .cart_totals {
 	margin-top: 30px;
-    padding-left: 52vw
+    padding-left: 50vw
 }
 
 .wc-proceed-to-checkout {
 	margin-top: 20px;
+}
+
+.cart_totals table {
+	margin-top: 5px;
+	border-top: 1px solid #808080
+
 }
 
 .wc-proceed-to-checkout a {
@@ -1047,6 +1053,12 @@ ul {
 	font-weight: 800;
 	padding: 8px 12px;
 	border-radius: 4px
+}
+
+.page-id-93 #main #post-93 .entry-summary,
+.page-id-93 .entry-summary,
+.page-id-93 #main .product-thumbnail {
+	display: none
 }
 
 /* CHECKOUT PAGE STYLING */
