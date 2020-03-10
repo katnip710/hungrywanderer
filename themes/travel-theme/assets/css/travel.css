@@ -96,8 +96,7 @@ footer .menu-item:nth-last-child(1) {
 #primary-menu {
 	display: flex;
 	justify-content: flex-end;
-	list-style: none;
-	margin-top: 5vw;
+	list-style: none
 }
 
 #primary-menu li {
@@ -105,7 +104,8 @@ footer .menu-item:nth-last-child(1) {
     font-size: 3vh;
     font-weight: 500;
     color: #1d1d1d;
-    margin-left: 5vw;
+	margin-left: 5vw;
+	padding-top: 60px
 }
 
 #primary-menu li a {
@@ -114,9 +114,7 @@ footer .menu-item:nth-last-child(1) {
 }
 
 #primary-menu li a:hover {
-	/* font-style: italic; */
-	color: #3B47FA;
-	border-bottom: 2px solid #3B47FA;
+	color: #6ADE9E
 }
 
 .stx-container,
@@ -1244,6 +1242,7 @@ table th, table td {
 #product-272 .woocommerce-product-details__short-description h2 {
 	display: block
 }
+
 
 
 
