@@ -1110,14 +1110,22 @@ ul {
 	text-align: center
 }
 
+.page-id-34 #post-34 {
+	padding: 0 6vw
+}
+
 /* PAGE TITLE STYLING ON BLOG PAGE */
 #post-36 h1 {
-	text-align: center
+	text-align: center;
 }
 
 /* PAGE TITLE STYLING ON CONTACT PAGE */
 #post-35 h1 {
 	text-align: center
+}
+
+.page-id-35 #post-35 {
+	padding: 0 10vw
 }
 
 /* STYLING ON MY ACCOUNT PAGE */
