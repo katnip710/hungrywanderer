@@ -1116,7 +1116,7 @@ ul {
 #post-10 .woocommerce {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center
 }
 
@@ -1136,6 +1136,19 @@ ul {
 	background-color: #6AAADE;
 	padding: 5px 10px;
 	border-radius: 4px
+}
+
+.woocommerce-MyAccount-content {
+	width: 60%
+}
+
+.woocommerce-MyAccount-content p {
+	font-size: 16px;
+	line-height: 28px
+}
+
+.woocommerce-MyAccount-content a {
+    color: black
 }
 
 
