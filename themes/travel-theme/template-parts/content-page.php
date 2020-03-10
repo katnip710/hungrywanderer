@@ -28,6 +28,10 @@
 		?>
 	</div><!-- .entry-content -->
 
+	<div class="entry-summary">
+		<?php the_excerpt(); ?>
+	</div><!-- .entry-summary -->
+
 	<?php if ( get_edit_post_link() ) : ?>
 		<!-- <footer class="entry-footer">
 			<?php

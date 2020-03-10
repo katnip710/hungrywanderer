@@ -31,6 +31,7 @@
 
 	<?php travel_theme_post_thumbnail(); ?>
 
+
 	<div class="entry-content">
 		<?php
 		the_content( sprintf(
@@ -52,6 +53,10 @@
 		) );
 		?>
 	</div><!-- .entry-content -->
+
+	<div class="entry-summary">
+		<?php the_excerpt(); ?>
+	</div><!-- .entry-summary -->
 
 	<footer class="entry-footer">
 		<?php travel_theme_entry_footer(); ?>
