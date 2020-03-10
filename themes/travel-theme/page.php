@@ -35,6 +35,10 @@ get_header();
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
+	<div class="entry-summary">
+		<?php the_excerpt(); ?>
+	</div><!-- .entry-summary -->
+
 <?php
 get_sidebar();
 get_footer();
