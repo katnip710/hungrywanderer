@@ -8,19 +8,6 @@
 	box-sizing: border-box;
 }
 
-body {
-	background-color: white;
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-	margin: 2vh;
-}
-
-.site {
-	width: 90%;
-}
-
 /* HEADER */
 .site-header {
     background-color: white;
@@ -105,7 +92,7 @@ footer .menu-item:nth-last-child(1) {
     font-weight: 500;
     color: #1d1d1d;
 	margin-left: 2vw;
-	padding-top: 60px
+	padding-top: 80px
 }
 
 #primary-menu li a {
@@ -789,10 +776,6 @@ ul.is-style-fancy-list li:before {
 	text-align: center
 }
 
-/* .single-product #content {
-	margin-top: -100px;
-} */
-
 .description_tab,
 .product_meta,
 .woocommerce-Tabs-panel h2 {
@@ -800,11 +783,12 @@ ul.is-style-fancy-list li:before {
 }
 
 .woocommerce-Tabs-panel p {
-	display: inline;
+    display: inline-block;
 	text-align: center;
 	font-family: 'Montserrat', sans-serif;
 	color: #1d1d1d;
-	line-height: 24px
+	line-height: 24px;
+	width: 80%
 }
 
 .price {
@@ -886,15 +870,15 @@ ul {
 
 /* SHOP PAGE STYLING */
 .page-id-7 #post-7 {
-	margin: 80px 0 120px 0
+	margin: 80px 0 120px 0;
+	padding: 0 4vw
 }
 
 .columns-3 {
 	display: flex;
 	flex-direction: row;
-	justify-content: stretch;
-	justify-content: space-between;
-	flex-wrap: wrap
+	justify-content: space-around;
+	flex-wrap: wrap;
 }
 
 .woocommerce-result-count, 
@@ -955,9 +939,6 @@ ul {
 }
 
 .woocommerce-message {
-	/* position: absolute;
-	top: 30%;
-	left: 31%	 */
 	width: 50%;
 	margin: 0 auto 30px auto
 }
@@ -995,9 +976,8 @@ ul {
 }
 
 .page-id-93 main {
-	max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 4rem
+	padding: 2rem 4rem;
 }
 
 .product-name,
@@ -1025,15 +1005,19 @@ ul {
 
 .actions .button {
 	color: white;
-	background-color: #6ADE9E;
+	background-color: #808080;
 	font-size: 18px;
 	padding: 5px 10px;
 	margin: 10px
 }
 
+.woocommerce-cart-form__contents {
+	margin: 0 auto
+}
+
 .cart_totals {
 	margin-top: 30px;
-    padding-left: 50vw
+	margin-left: 62vw
 }
 
 .wc-proceed-to-checkout {
@@ -1053,7 +1037,7 @@ ul {
 	font-size: 20px;
 	font-weight: 800;
 	padding: 8px 12px;
-	border-radius: 4px
+	border-radius: 5px
 }
 
 .page-id-93 #main #post-93 .entry-summary,
@@ -1063,6 +1047,9 @@ ul {
 }
 
 /* CHECKOUT PAGE STYLING */
+.page-id-9 #post-9 {
+	padding: 5vw
+}
 
 .page-id-9 .form-row {
 	margin: 16px 0
@@ -1108,6 +1095,14 @@ ul {
 
 .woocommerce-privacy-policy-text {
 	color: #696969;
+}
+
+.woocommerce-order .woocommerce-notice--success {
+	font-size: 20px;
+	font-weight: 800;
+	margin-bottom: 15px;
+	color: #6ADE9E
+
 }
 
 /* PAGE TITLE STYLING ON ABOUT PAGE */
@@ -1193,11 +1188,6 @@ table th, table td {
 	color: white;
 	padding: 5px 10px	
 }
-
-/* .page-id-10 #post-10 .woocommerce {
-	display: flex;
-	flex-direction: column;
-} */
 
 .woocommerce-form-login {
 	margin-top: 40px;
