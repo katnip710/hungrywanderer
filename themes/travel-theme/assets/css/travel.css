@@ -1097,12 +1097,15 @@ ul {
 	color: #696969;
 }
 
-/* MAIN TITLE STYLING ON PAGES */
-
+/* PAGE TITLE STYLING ON ABOUT PAGE */
 #post-34 h1 {
 	text-align: center
 }
 
+/* PAGE TITLE STYLING ON BLOG PAGE */
+#post-36 h1 {
+	text-align: center
+}
 
 
 
