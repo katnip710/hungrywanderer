@@ -1181,6 +1181,23 @@ table th, table td {
 	padding: 5px 10px	
 }
 
+.page-id-10 #post-10 .woocommerce {
+	display: flex;
+	flex-direction: column;
+}
+
+.woocommerce-form-login {
+	margin-top: 40px;
+}
+
+.woocommerce-form-login p {
+	margin: 10px 0
+}
+
+.lost_password a {
+	color: black
+}
+
 
 
 
