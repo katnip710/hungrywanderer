@@ -1105,6 +1105,15 @@ ul {
 
 }
 
+/* ADJUSTED FEATURED IMAGES ON HOME PAGE */
+.home .post-thumbnail{
+	text-align: center
+}
+
+.home .entry-content {
+	margin-top: 100px
+}
+
 /* PAGE TITLE STYLING ON ABOUT PAGE */
 #post-34 h1 {
 	text-align: center
