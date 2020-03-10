@@ -1280,3 +1280,29 @@ table th, table td {
 
 
 
+/* FORMS */
+#wsf-1-section-2 fieldset {
+	padding: 2vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-content: center;
+	align-items: center;
+}
+
+#wsf-1-fields-2 {
+	padding: 2vh;
+}
+
+#wsf-1-field-wrapper-1, #wsf-1-field-wrapper-2, #wsf-1-field-wrapper-3, #wsf-1-field-wrapper-4, #wsf-1-field-wrapper-5, #wsf-1-field-wrapper-6, #wsf-1-field-wrapper-7  {
+	margin: 2vh;
+	text-align: center;
+}
+
+#wsf-1-field-wrapper-7 button {
+	text-align: center;
+	background-color: #6AAADE;
+	padding: 2vh;
+	color: white;
+}
+
