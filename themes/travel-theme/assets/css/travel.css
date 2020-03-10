@@ -1113,17 +1113,29 @@ ul {
 }
 
 /* STYLING ON MY ACCOUNT PAGE */
-.woocommerce-MyAccount-navigation {
-	display: inline-block;
-	border: 2px solid black
-}
-
 #post-10 .woocommerce {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: center;
+	justify-content: space-between;
+	align-items: center
+}
 
+.woocommerce-MyAccount-navigation {
+	display: inline-block
+}
+
+.woocommerce-MyAccount-navigation-link {
+	margin: 20px 0
+}
+
+.woocommerce-MyAccount-navigation-link a {
+	font-size: 18px;
+	font-weight: 800;
+	text-decoration: none;
+	color: white;
+	background-color: #6AAADE;
+	padding: 5px 10px;
+	border-radius: 4px
 }
 
 
