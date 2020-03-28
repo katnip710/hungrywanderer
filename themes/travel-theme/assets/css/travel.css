@@ -1284,11 +1284,6 @@ table th, table td {
 	display: block
 }
 
-
-
-
-
-
 /* FORMS */
 #wsf-1-section-2 fieldset {
 	display: flex;
@@ -1321,5 +1316,16 @@ table th, table td {
 	background-color: #6AAADE;
 	padding: 2vh;
 	color: white;
+}
+
+/* RESPONSIVENESS */
+
+/* hamburger menu */
+@media screen and (max-width: 1024px) {
+	
+	.responsive-menu-search-box {
+		display: none;
+	}
+
 }
 
