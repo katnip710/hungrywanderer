@@ -1027,7 +1027,6 @@ ul {
 .cart_totals table {
 	margin-top: 5px;
 	border-top: 1px solid #808080
-
 }
 
 .wc-proceed-to-checkout a {
@@ -1450,6 +1449,15 @@ table th, table td {
 	.cart-collaterals .cart_totals h2,
 	.cart-collaterals .cart_totals table {
 		text-align: left
+	}
+
+	.input-text {
+		border: 1px solid #bdbdbd;
+		padding: 2px 5px
+	}
+	
+	.quantity .input-text {
+		width: 70%
 	}
 }
 
