@@ -1211,13 +1211,13 @@ table{
     border-collapse: collapse;
 }
 table thead tr th{
-	border-top: 1px solid #808080;
-    border-bottom: 1px solid #808080
+	border-top: 1px solid #b1b1b1;
+    border-bottom: 1px solid #b1b1b1
 }
 table th, table td {
-    border-left: 1px solid #808080;
-	border-right: 1px solid #808080;
-	border-bottom: 1px solid #808080
+    /* border-left: 1px solid #808080;
+	border-right: 1px solid #808080; */
+	border-bottom: 1px solid #b1b1b1
 }
 table th, table td { 
     padding: 4px 8px;
@@ -1320,12 +1320,45 @@ table th, table td {
 
 /* RESPONSIVENESS */
 
-/* hamburger menu */
+/* HAMBURGER MENU */
 @media screen and (max-width: 1024px) {
-	
+
 	.responsive-menu-search-box {
 		display: none;
 	}
-
 }
+
+/* ADJUSTMENT ON LOGO SIZE */ 
+@media screen and (max-width: 680px) {
+
+	.site-logo img {
+		width: 17vw
+	}
+}
+
+/* FOOTER */
+@media screen and (max-width: 900px) {
+
+	footer .site-info {
+		display: flex;
+		flex-direction: column;
+		text-align: center
+	}
+
+	.site-footer {
+		height: 18vh
+	}
+
+	.social-media {
+		margin-top: 15px;
+		text-align: center;
+	}
+}
+
+
+
+
+
+
+
 
