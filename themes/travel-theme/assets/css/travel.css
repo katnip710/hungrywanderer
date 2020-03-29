@@ -1337,7 +1337,7 @@ table th, table td {
 }
 
 /* FOOTER */
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1024px) {
 
 	footer .site-info {
 		display: flex;
@@ -1352,6 +1352,104 @@ table th, table td {
 	.social-media {
 		margin-top: 15px;
 		text-align: center;
+	}
+
+	.social-media img {
+		width: 25px;
+		height: auto
+	}
+}
+
+/* CART PAGE */
+@media screen and (max-width: 963px) {
+
+	.wc-proceed-to-checkout a {
+		font-size: 16px;
+	} 
+
+	/* Force table to not be like tables anymore */
+	.woocommerce-cart-form table.shop_table, 
+	.woocommerce-cart-form table.shop_table thead, 
+	.woocommerce-cart-form table.shop_table tbody, 
+	.woocommerce-cart-form table.shop_table th, 
+	.woocommerce-cart-form table.shop_table td, 
+	.woocommerce-cart-form table.shop_table tr { 
+		display: block; 
+	}
+
+	/* Hide table headers */
+	.woocommerce-cart-form table.shop_table thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	.woocommerce-cart-form table.shop_table td { 
+		/* Behave  like a "row" */
+		position: relative;
+		padding-left: 30% !important; 
+	}
+
+	.woocommerce-cart-form table.shop_table {
+		border: none;
+	}
+
+	.woocommerce-cart-form table.shop_table td.product-spacer {
+		border-color: #FFF;
+		height: 10px;
+	}
+
+	.woocommerce-cart-form table.shop_table td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/* Label the data */
+	
+	.woocommerce-cart-form table.shop_table td.product-name:before {
+	content: "Product";
+	}
+
+	.woocommerce-cart-form table.shop_table td.product-price:before {
+	content: "Price";
+	}
+
+	.woocommerce-cart-form table.shop_table td.product-quantity:before {
+	content: "Quantity";
+	}
+
+	.woocommerce-cart-form table.shop_table td.product-subtotal:before {
+	content: "Subtotal";
+	}
+
+	.woocommerce-cart-form table.shop_table td.product-total:before {
+	content: "Total";
+	}
+
+	td.product-remove::before,
+	td.product-name::before,
+	td.product-price::before,
+	td.product-quantity::before,
+	td.product-subtotal::before
+    {
+		text-align: left;
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.cart_totals {
+		margin-left: 0;
+	}
+
+	.cart-collaterals .cart_totals h2,
+	.cart-collaterals .cart_totals table {
+		text-align: left
 	}
 }
 
