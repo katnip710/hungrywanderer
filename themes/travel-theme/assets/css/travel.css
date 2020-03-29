@@ -16,7 +16,7 @@
 }
 
 .site-logo img {
-    width: 12vw;
+    width: 10vw;
     height: auto;
     position: absolute;
     top: 4vw;
@@ -1158,7 +1158,7 @@ ul {
 	padding: 0 5vw
 }
 
-/* PAGE TITLE STYLING ON CONTACT PAGE */
+/* STYLING ON CONTACT PAGE */
 #post-35 h1 {
 	text-align: center
 }
@@ -1166,6 +1166,53 @@ ul {
 .page-id-35 #post-35 {
 	padding: 0 10vw
 }
+
+#wsf-1-field-1,
+#wsf-1-field-2,
+#wsf-1-field-3,
+#wsf-1-field-4 {
+	border: 1px solid #bdbdbd;
+	width: 20vw
+}
+
+#wsf-1-field-7 {
+	font-weight: bolder
+}
+
+/* CONTACT FORMS */
+#wsf-1-section-2 fieldset {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+
+#wsf-1-fields-2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+
+#wsf-1-field-wrapper-1, #wsf-1-field-wrapper-2, #wsf-1-field-wrapper-3, #wsf-1-field-wrapper-4, #wsf-1-field-wrapper-5, #wsf-1-field-wrapper-7, #wsf-1-field-wrapper-9 {
+	margin: 2vh;
+	text-align: center;
+} 
+
+
+#wsf-1-field-wrapper-9 {
+	width: 30vh;
+}
+
+#wsf-1-field-wrapper-7 button {
+	text-align: center;
+	background-color: #6AAADE;
+	padding: 2vh;
+	color: white;
+}
+
 
 /* STYLING ON MY ACCOUNT PAGE */
 #post-10 .woocommerce {
@@ -1283,41 +1330,9 @@ table th, table td {
 	display: block
 }
 
-/* FORMS */
-#wsf-1-section-2 fieldset {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-}
-
-#wsf-1-fields-2 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-}
-
-#wsf-1-field-wrapper-1, #wsf-1-field-wrapper-2, #wsf-1-field-wrapper-3, #wsf-1-field-wrapper-4, #wsf-1-field-wrapper-5, #wsf-1-field-wrapper-7, #wsf-1-field-wrapper-9 {
-	margin: 2vh;
-	text-align: center;
-} 
-
-
-#wsf-1-field-wrapper-9 {
-	width: 30vh;
-}
-
-#wsf-1-field-wrapper-7 button {
-	text-align: center;
-	background-color: #6AAADE;
-	padding: 2vh;
-	color: white;
-}
-
-/* RESPONSIVENESS */
+/********************************************/
+/****** RESPONSIVENESS ******/
+/********************************************/
 
 /* HAMBURGER MENU */
 @media screen and (max-width: 1024px) {
@@ -1459,6 +1474,22 @@ table th, table td {
 	.quantity .input-text {
 		width: 70%
 	}
+}
+
+/* CONTACT FORM */
+@media screen and (max-width: 599px) {
+
+	#wsf-1-sections-2 {
+		margin-top: 30px;
+	}
+
+	#wsf-1-field-1,
+	#wsf-1-field-2,
+	#wsf-1-field-3,
+	#wsf-1-field-4 {
+		width: 35vw
+	}
+
 }
 
 
