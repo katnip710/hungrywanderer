@@ -1234,10 +1234,8 @@ ul {
 	font-size: 18px;
 	font-weight: 800;
 	text-decoration: none;
-	color: white;
-	background-color: #6AAADE;
-	padding: 5px 10px;
-	border-radius: 4px
+	color: black;
+	border-bottom: 3px solid #6AAADE;
 }
 
 .woocommerce-MyAccount-content {
@@ -1329,6 +1327,11 @@ table th, table td {
 #product-272 .woocommerce-product-details__short-description h2 {
 	display: block
 }
+
+.page-id-10 .entry-summary {
+	display: none
+}
+
 
 /********************************************/
 /****** RESPONSIVENESS ******/
@@ -1489,7 +1492,14 @@ table th, table td {
 	#wsf-1-field-4 {
 		width: 35vw
 	}
+}
 
+/* MY ACCOUNT PAGE */
+@media screen and (max-width: 510px) {
+
+	.page-id-10 .woocommerce {
+		margin: 0 15px
+	}
 }
 
 
