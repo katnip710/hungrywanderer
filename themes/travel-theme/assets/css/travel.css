@@ -101,7 +101,7 @@ footer .menu-item:nth-last-child(1) {
 }
 
 #primary-menu li a:hover {
-	color: #6ADE9E
+	border-bottom: 3px solid #6AAADE;
 }
 
 .stx-container,
@@ -1402,7 +1402,7 @@ table th, table td {
 	}
 
 	.woocommerce-cart-form table.shop_table td { 
-		/* Behave  like a "row" */
+		/* Behave like a "row" */
 		position: relative;
 		padding-left: 30% !important; 
 	}
