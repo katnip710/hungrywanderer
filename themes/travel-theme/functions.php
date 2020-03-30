@@ -285,6 +285,11 @@ require get_template_directory() . '/inc/block-editor.php';
 require get_template_directory() . '/inc/woocommerce.php';
 
 /**
+ * Registering custom post-types.
+ */
+require get_template_directory() . '/inc/custom-post-types.php';
+
+/**
  * Load Jetpack compatibility file.
  */
 if (defined('JETPACK__VERSION')) {
