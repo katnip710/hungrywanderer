@@ -1521,6 +1521,20 @@ table th, table td {
 	}
 }
 
+/* TESTIMONIALS AND EVENTS PAGE STYLING */
+.post-type-archive h1 {
+	text-align: center;
+}
+
+.post-type-archive .entry-header {
+	margin-top: 80px;
+}
+
+.post-type-archive .entry-title a {
+	text-decoration: none;
+	color: black
+}
+
 
 
 
