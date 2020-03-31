@@ -246,11 +246,12 @@ ul.is-style-fancy-list li:before {
 }
 
 .is-style-fancy-quote p {
-	font-size: 2vw;
+	font-size: 1.5vw;
 	font-style: italic;
 	quotes: "\201C""\201D""\2018""\2019";
 	padding: 10px 20px;
 	line-height: 1.4;
+	text-align: left;
 }
 
 .is-style-fancy-quote p:before {
@@ -262,7 +263,7 @@ ul.is-style-fancy-list li:before {
 	position: relative;
 	top: 30px;
 	color: #ccc;
-	font-size: 3em;
+	font-size: 4em;
 	color: #3B47FA;
 }
 
@@ -275,14 +276,14 @@ ul.is-style-fancy-list li:before {
 	position: relative;
 	top: 35px;
 	color: #ccc;
-	font-size: 3em;
+	font-size: 4em;
 	color: #3B47FA;
 }
 
 .is-style-fancy-quote cite {
 	margin: 0;
 	text-align: right;
-	font-size: 1.5em;
+	font-size: 1.2em;
 	font-style: italic;
 }
 
@@ -1330,6 +1331,24 @@ table th, table td {
 
 .page-id-10 .entry-summary {
 	display: none
+}
+
+/* STYLING ON TESTIMONIALS */
+.travel_theme_book {
+	margin-left: 5vw;
+}
+
+.travel_theme_book .entry-summary {
+	display: none;
+}
+
+/* STYLING ON EVENTS */
+.travel_theme_events {
+	margin-left: 5vw;
+}
+
+.travel_theme_events .entry-summary {
+	display: none;
 }
 
 

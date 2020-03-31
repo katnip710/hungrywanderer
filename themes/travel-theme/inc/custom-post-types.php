@@ -86,7 +86,7 @@ function travel_theme_init_post_types() {
         'query_var'          => true,
         'rewrite'            => array( 'slug' => 'events' ), //slugs should be plural
         'capability_type'    => 'post',  //posts should be singular
-        'has_archive'        => false,    
+        'has_archive'        => true,    
         'hierarchical'       => false,   //no children, just parent
         'menu_position'      => null,
         'menu_icon'          => 'dashicons-calendar-alt',
