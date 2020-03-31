@@ -30,15 +30,37 @@
 		<?php 
 		//Custom WP_Query() for post types located in the footer of your site that pulls in the 3 most recent posts with the following info: Featured Image, Title, Excerpt, and Post Link (kat)
 			$args = array(
-				'post_type' => 'map',
+				'post_type' => 'travel_theme_book',
 				'orderby' => 'post_date',
 				'posts_per_page' => 3,
 				'post_status' => 'publish'
 			);
 
-			$map_query = new WP_Query($args);
+			$query1 = new WP_Query($args);
 
-			while ($map_query->have_posts()) : $map_query->the_post();
+			while ($query1->have_posts()) : $query1->the_post();
+
+				the_title();
+				the_post_thumbnail('thumbnail');
+				the_excerpt();
+				get_permalink();
+
+			endwhile; 
+			wp_reset_query();
+		?>
+
+		<?php 
+		//Custom WP_Query() for post types located in the footer of your site that pulls in the 3 most recent posts with the following info: Featured Image, Title, Excerpt, and Post Link (kat)
+			$args = array(
+				'post_type' => 'travel_theme_events',
+				'orderby' => 'post_date',
+				'posts_per_page' => 3,
+				'post_status' => 'publish'
+			);
+
+			$query2 = new WP_Query($args);
+
+			while ($query2->have_posts()) : $query2->the_post();
 
 				the_title();
 				the_post_thumbnail('thumbnail');
