@@ -256,6 +256,9 @@ function travel_theme_scripts()
 }
 add_action('wp_enqueue_scripts', 'travel_theme_scripts');
 
+
+
+
 /**
  * Implement the Custom Header feature.
  */
